@@ -1,17 +1,17 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Profile from "../component/profile";
+import Profile from "../components/profile";
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Marcus Tsai Dev</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Create Next App</title>
+        <link rel="icon" href="123.png" />
       </Head>
 
       <main>
         <Profile />
-        {/* <h1 className={styles.title}>
+        <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
@@ -47,7 +47,7 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-        </div> */}
+        </div>
       </main>
 
       <footer>
@@ -63,7 +63,7 @@ export default function Home() {
 
       <style jsx>{`
         main {
-          padding: 0;
+          padding: 5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -112,5 +112,6 @@ export default function Home() {
         }
       `}</style>
     </div>
+    // <div>123</div>
   );
 }
