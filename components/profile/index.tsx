@@ -1,5 +1,5 @@
 import styles from "./profile.module.css";
-import { jobExperience } from "../../config/text";
+import { jobExperience, techStack } from "../../config/text";
 import {
   motion,
   useScroll,
@@ -54,22 +54,80 @@ export default function Profile() {
         </h4>
       </motion.div>
       <h1 className={styles.tech_stack}>Tech Stack</h1>
-      <div className={styles.fields}>
-        <div
-          className={styles.row_container}
-          style={{ alignItems: "center", gap: "20px" }}
-        >
-          <img className={styles.fields_Img} src="123.png" />
+      <div
+        className={styles.row_container}
+        style={{ width: "100%", gap: "12px" }}
+      >
+        {techStack.map((tech) => (
           <div
             className={styles.column_container}
-            style={{ width: "auto", padding: "10px" }}
+            style={{
+              borderRadius: "12px",
+              border: "1px solid #e0e0e0",
+              padding: "20px",
+            }}
           >
-            <div className={styles.field} style={{ marginInline: "10px" }}>
-              Frontend Dev
+            <div
+              className={styles.row_container}
+              style={{ alignItems: "center", gap: "20px" }}
+            >
+              <img className={styles.fields_Img} src={tech.img} />
+              <div
+                className={styles.column_container}
+                style={{ width: "auto", padding: "10px" }}
+              >
+                <div className={styles.field} style={{ marginInline: "10px" }}>
+                  {tech.field}
+                </div>
+                <div className={styles.field_baseline} />
+              </div>
             </div>
-            <div className={styles.field_baseline} />
+            <div
+              className={styles.row_container}
+              style={{
+                alignItems: "center",
+                gap: "20px",
+                flexWrap: "wrap",
+                marginTop: "10px",
+              }}
+            >
+              {tech.languages.map((lang) => (
+                <div
+                  className={styles.row_container}
+                  style={{
+                    alignItems: "center",
+                    gap: "10px",
+                    backgroundColor: tech.background,
+                    padding: "5px 15px",
+                    borderRadius: "10px",
+                    width: "auto",
+                    flexWrap: "nowrap",
+                  }}
+                >
+                  <img
+                    className={styles.fields_Img}
+                    src={lang.img}
+                    style={{
+                      width: "24px",
+                      // backgroundColor: tech.color,
+                      boxShadow: `0 0 20px 2px ${tech.color}`,
+                    }}
+                  />
+                  <div
+                    style={{
+                      color: tech.color,
+                      fontSize: "14px",
+                      lineHeight: "30px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {lang.lang}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
 
       <h1 className={styles.tech_stack}>Experience</h1>

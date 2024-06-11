@@ -1,3 +1,5 @@
+import { color } from "framer-motion";
+
 export const jobExperience = [
   {
     duration: "2023/07 - Present",
@@ -16,5 +18,50 @@ export const jobExperience = [
     title: "Data Analyst Intern, Nomura",
     des: "Analyzed and visualized data to provide insights for the trading team. Developed a dashboard that improved the efficiency of data analysis by 30%.",
     tech: ["Python", "Pandas", "PyTorch"],
+  },
+];
+
+export const techStack = [
+  {
+    img: "atom.png",
+    field: "Frontend Dev",
+    languages: [
+      { lang: "React", img: "atom.png" },
+      { lang: "Css modules", img: "css.png" },
+      { lang: "JS", img: "js.png" },
+      { lang: "html", img: "atom.png" },
+      // "TypeScript",
+      // "Css Modules",
+      // "html",
+      // "styled-components",
+    ],
+    color: "rgb(97, 218, 251)",
+    background: "rgba(97, 218, 251, 0.2)",
+  },
+  {
+    img: "web.png",
+    field: "Backend Dev",
+    languages: [
+      { lang: "Python", img: "css.png" },
+      { lang: "FastAPI", img: "atom.png" },
+      { lang: "MySql", img: "js.png" },
+      { lang: "SQLAlchemy", img: "js.png" },
+    ],
+    // ["Python", "FastAPI", "MySql", "SQLAlchemy", "Airflow"],
+    color: "rgb(55, 118, 171)",
+    background: "rgba(55, 118, 171, 0.2)",
+  },
+  {
+    img: "networking.png",
+    field: "DevOps  Networking",
+    // languages: ["Git", "Docker", "https"],
+    languages: [
+      { lang: "React", img: "atom.png" },
+      { lang: "React", img: "atom.png" },
+      { lang: "React", img: "atom.png" },
+      { lang: "React", img: "atom.png" },
+    ],
+    color: "rgb(255, 160, 122)",
+    background: "rgba(255, 160, 122, 0.2)",
   },
 ];
