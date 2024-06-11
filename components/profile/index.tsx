@@ -2,7 +2,7 @@ import styles from "./profile.module.css";
 import { motion, useScroll, useTransform } from "framer-motion";
 export default function Profile() {
   const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 200], [1, 20]);
+  const scale = useTransform(scrollY, [0, 200], [1, 30]);
   const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
   const marginBottom = useTransform(scrollY, [0, 200], [0, 200]);
   const opacityInOut = useTransform(
