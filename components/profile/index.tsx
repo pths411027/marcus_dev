@@ -12,31 +12,45 @@ import {
 export default function Profile() {
   const { scrollY } = useScroll();
   const controls = useAnimation();
-  // const scale = useTransform(scrollY, [0, 200], [1, 30]);
+  const imgControls = useAnimation();
   const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
   const opacityInOut = useTransform(
     scrollY,
-    [0, 10, 190, 200], // 定义滚动位置的范围
+    [0, 10, 200, 201], // 定义滚动位置的范围
     [1, 0, 0, 1] // 定义相应的透明度值
   );
-  const scale = useTransform(
-    scrollY,
-    [0, 200, 201], // 定义滚动位置的范围
-    [1, 30, 1] // 定义相应的透明度值
-  );
+  const scale = useTransform(scrollY, [0, 200, 201], [1, 30, 1]);
   const opacity = useTransform(scrollY, [200, 201], [1, 0]);
   const opacity_ = useTransform(scrollY, [50, 250], [0, 1]);
+  let animationExecuted = false;
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // console.log(latest);
+    console.log(scrollY.getPrevious() - latest);
     if (latest > 200)
       controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
+    if (latest > 100 && !animationExecuted) {
+      imgControls.start({
+        scale: [1, 30, 1],
+        // marginTop: [0, 200, 0],
+        transition: { times: [0, 0.99, 1] },
+      });
+      animationExecuted = true;
+    }
+    if (latest > 200) {
+      controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
+    }
+
+    // if (latest < 10) {
+    //   animationExecuted = false;
+    // }
   });
+  const scale_ = scrollY.get() > 0 ? scale : 1;
   return (
     <div className={styles.container}>
       <motion.img
+        animate={imgControls}
         className={styles.img}
         src="123.png"
-        style={{ scale, marginTop }}
+        style={{ marginTop }}
       />
 
       <motion.div style={{ opacity: opacityInOut }}>
@@ -55,13 +69,16 @@ export default function Profile() {
       </motion.div>
       <h1 className={styles.tech_stack}>Tech Stack</h1>
       <div
-        className={styles.row_container}
-        style={{ width: "100%", gap: "12px" }}
+        className={`${styles.row_container} ${styles.tech_stack_container}`}
+        style={{ width: "100%", gap: "10px", flexWrap: "wrap" }}
       >
         {techStack.map((tech) => (
           <div
+            key={tech.field}
             className={styles.column_container}
             style={{
+              flex: "1",
+              minWidth: "350px",
               borderRadius: "12px",
               border: "1px solid #e0e0e0",
               padding: "20px",
@@ -69,39 +86,36 @@ export default function Profile() {
           >
             <div
               className={styles.row_container}
-              style={{ alignItems: "center", gap: "20px" }}
+              style={{ alignItems: "center" }}
             >
               <img className={styles.fields_Img} src={tech.img} />
               <div
                 className={styles.column_container}
                 style={{ width: "auto", padding: "10px" }}
               >
-                <div className={styles.field} style={{ marginInline: "10px" }}>
-                  {tech.field}
-                </div>
-                <div className={styles.field_baseline} />
+                <div className={styles.field}>{tech.field}</div>
+                <div
+                  className={styles.field_baseline}
+                  style={{ backgroundColor: tech.color }}
+                />
               </div>
             </div>
             <div
               className={styles.row_container}
               style={{
                 alignItems: "center",
-                gap: "20px",
                 flexWrap: "wrap",
                 marginTop: "10px",
               }}
             >
               {tech.languages.map((lang) => (
                 <div
-                  className={styles.row_container}
+                  key={lang.lang}
+                  // className={styles.row_container}
+                  className={`${styles.row_container} ${styles.lang_box}`}
                   style={{
-                    alignItems: "center",
-                    gap: "10px",
                     backgroundColor: tech.background,
-                    padding: "5px 15px",
-                    borderRadius: "10px",
-                    width: "auto",
-                    flexWrap: "nowrap",
+                    boxShadow: `0 0 20px 2px ${tech.color}`,
                   }}
                 >
                   <img
@@ -109,16 +123,14 @@ export default function Profile() {
                     src={lang.img}
                     style={{
                       width: "24px",
-                      // backgroundColor: tech.color,
+                      backgroundColor: tech.background,
                       boxShadow: `0 0 20px 2px ${tech.color}`,
                     }}
                   />
                   <div
+                    className={styles.tech_item}
                     style={{
                       color: tech.color,
-                      fontSize: "14px",
-                      lineHeight: "30px",
-                      whiteSpace: "nowrap",
                     }}
                   >
                     {lang.lang}
@@ -133,7 +145,8 @@ export default function Profile() {
       <h1 className={styles.tech_stack}>Experience</h1>
       {jobExperience.map((job) => (
         <div
-          className={styles.row_container}
+          key={job.title}
+          className={`${styles.row_container} ${styles.job_container}`}
           style={{ alignItems: "baseline" }}
         >
           <div className={styles.job_duration}>{job.duration}</div>
@@ -142,7 +155,9 @@ export default function Profile() {
             <div className={styles.job_des}>{job.des}</div>
             <div className={`${styles.row_container} ${styles.job_skills}`}>
               {job.tech.map((skill) => (
-                <div className={styles.job_skill}>{skill}</div>
+                <div key={skill} className={styles.job_skill}>
+                  {skill}
+                </div>
               ))}
             </div>
           </div>

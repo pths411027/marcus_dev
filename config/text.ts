@@ -53,7 +53,7 @@ export const techStack = [
   },
   {
     img: "networking.png",
-    field: "DevOps  Networking",
+    field: "Infra Dev Ops",
     // languages: ["Git", "Docker", "https"],
     languages: [
       { lang: "React", img: "atom.png" },
