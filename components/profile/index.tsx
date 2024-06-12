@@ -26,21 +26,22 @@ export default function Profile() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     console.log(scrollY.getPrevious() - latest);
     if (latest > 200)
-      controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
+      // controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
+      controls.start({
+        x: "0",
+        opacity: 1,
+        transition: { duration: 1.5 },
+        // transform: "translateX(-50%)",
+      });
     if (latest > 100 && !animationExecuted) {
       imgControls.start({
         scale: [1, 30, 1],
-        // marginTop: [0, 200, 0],
         transition: { times: [0, 0.99, 1] },
       });
       animationExecuted = true;
     }
-    if (latest > 200) {
-      controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
-    }
-
-    // if (latest < 10) {
-    //   animationExecuted = false;
+    // if (latest > 200) {
+    //   controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
     // }
   });
   const scale_ = scrollY.get() > 0 ? scale : 1;
@@ -53,13 +54,15 @@ export default function Profile() {
         style={{ marginTop }}
       />
 
-      <motion.div style={{ opacity: opacityInOut }}>
+      <motion.div className={styles.name}>
         <h1 className={styles.name}>marcus.dev</h1>
-      </motion.div>
-      <motion.div style={{ opacity: opacity_ }}>
         <h1 className={styles.name}>A Frontend Developer @ Taiwan</h1>
       </motion.div>
-      <motion.div animate={controls} style={{ opacity: 0, x: "-100%" }}>
+
+      <motion.div
+        animate={controls}
+        style={{ opacity: 0, x: "-100%", width: "100%" }}
+      >
         <h1 className={styles.name}>Biography</h1>
         <h4 className={styles.self_introduction}>
           "Hi, I'm Marcus Tsai, a frontend engineer now working for Shopee. I
@@ -67,7 +70,8 @@ export default function Profile() {
           Css Modules!"
         </h4>
       </motion.div>
-      <h1 className={styles.tech_stack}>Tech Stack</h1>
+
+      <h1 className={styles.topic}>Tech Stack</h1>
       <div
         className={`${styles.row_container} ${styles.tech_stack_container}`}
         style={{ width: "100%", gap: "10px", flexWrap: "wrap" }}
@@ -142,7 +146,7 @@ export default function Profile() {
         ))}
       </div>
 
-      <h1 className={styles.tech_stack}>Experience</h1>
+      <h1 className={styles.topic}>Experience</h1>
       {jobExperience.map((job) => (
         <div
           key={job.title}

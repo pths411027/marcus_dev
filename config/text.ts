@@ -36,7 +36,7 @@ export const techStack = [
       // "styled-components",
     ],
     color: "rgb(97, 218, 251)",
-    background: "rgba(97, 218, 251, 0.2)",
+    background: "rgba(97, 218, 251, 0.3)",
   },
   {
     img: "web.png",
@@ -49,7 +49,7 @@ export const techStack = [
     ],
     // ["Python", "FastAPI", "MySql", "SQLAlchemy", "Airflow"],
     color: "rgb(55, 118, 171)",
-    background: "rgba(55, 118, 171, 0.2)",
+    background: "rgba(55, 118, 171, 0.3)",
   },
   {
     img: "networking.png",
@@ -62,6 +62,6 @@ export const techStack = [
       { lang: "React", img: "atom.png" },
     ],
     color: "rgb(255, 160, 122)",
-    background: "rgba(255, 160, 122, 0.2)",
+    background: "rgba(255, 160, 122, 0.3)",
   },
 ];
