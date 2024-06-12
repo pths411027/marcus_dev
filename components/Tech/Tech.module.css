@@ -30,9 +30,6 @@
   color: #ffffff;
   margin-top: 20px;
   align-self: center;
-  @media screen and (max-width: 768px) {
-    font-size: 20px;
-  }
 }
 .self_introduction {
   text-align: center;
@@ -194,6 +191,11 @@
   @media screen and (max-width: 768px) {
     font-size: 12px;
     padding: 4px 10px;
+  }
+}
+.row_container {
+  @media screen and (max-width: 1300px) {
+    flex-direction: column;
   }
 }
 

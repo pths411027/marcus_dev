@@ -56,10 +56,9 @@ export const techStack = [
     field: "Infra Dev Ops",
     // languages: ["Git", "Docker", "https"],
     languages: [
-      { lang: "React", img: "atom.png" },
-      { lang: "React", img: "atom.png" },
-      { lang: "React", img: "atom.png" },
-      { lang: "React", img: "atom.png" },
+      { lang: "Git", img: "atom.png" },
+      { lang: "Docker", img: "atom.png" },
+      { lang: "https", img: "atom.png" },
     ],
     color: "rgb(255, 160, 122)",
     background: "rgba(255, 160, 122, 0.3)",

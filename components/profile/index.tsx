@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./profile.module.css";
 import { jobExperience, techStack } from "../../config/text";
 import {
@@ -5,10 +6,12 @@ import {
   useScroll,
   useTransform,
   useMotionValue,
+  LayoutGroup,
   scroll,
   useMotionValueEvent,
   useAnimation,
 } from "framer-motion";
+import { useEffect } from "react";
 export default function Profile() {
   const { scrollY } = useScroll();
   const controls = useAnimation();
@@ -22,15 +25,17 @@ export default function Profile() {
   const scale = useTransform(scrollY, [0, 200, 201], [1, 30, 1]);
   const opacity = useTransform(scrollY, [200, 201], [1, 0]);
   const opacity_ = useTransform(scrollY, [50, 250], [0, 1]);
-  let animationExecuted = false;
+  const [animationExecuted, setAnimationExecuted] = useState(false);
+  const controls_ = useAnimation();
+  const controls__ = useAnimation();
   useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log(scrollY.getPrevious() - latest);
+    // console.log(scrollY.getPrevious() - latest);
     if (latest > 200)
       // controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
       controls.start({
         x: "0",
         opacity: 1,
-        transition: { duration: 1.5 },
+        transition: { duration: 0.5 },
         // transform: "translateX(-50%)",
       });
     if (latest > 100 && !animationExecuted) {
@@ -38,12 +43,21 @@ export default function Profile() {
         scale: [1, 30, 1],
         transition: { times: [0, 0.99, 1] },
       });
-      animationExecuted = true;
+      setAnimationExecuted(true);
     }
-    // if (latest > 200) {
-    //   controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
-    // }
+    if (latest > 350) {
+      controls_
+        .start({ y: "0", opacity: 1, transition: { duration: 0.5 } })
+        .then(() => {
+          controls__.start({
+            y: "0",
+            opacity: 1,
+            transition: { duration: 0.5 },
+          });
+        });
+    }
   });
+  const [selected, setSelected] = useState(-1);
   const scale_ = scrollY.get() > 0 ? scale : 1;
   return (
     <div className={styles.container}>
@@ -70,81 +84,109 @@ export default function Profile() {
           Css Modules!"
         </h4>
       </motion.div>
-
-      <h1 className={styles.topic}>Tech Stack</h1>
-      <div
-        className={`${styles.row_container} ${styles.tech_stack_container}`}
-        style={{ width: "100%", gap: "10px", flexWrap: "wrap" }}
+      <motion.div
+        className={styles.topic}
+        animate={controls_}
+        style={{ y: "-100%", opacity: 0 }}
       >
-        {techStack.map((tech) => (
-          <div
-            key={tech.field}
-            className={styles.column_container}
-            style={{
-              flex: "1",
-              minWidth: "350px",
-              borderRadius: "12px",
-              border: "1px solid #e0e0e0",
-              padding: "20px",
-            }}
-          >
-            <div
-              className={styles.row_container}
-              style={{ alignItems: "center" }}
-            >
-              <img className={styles.fields_Img} src={tech.img} />
-              <div
-                className={styles.column_container}
-                style={{ width: "auto", padding: "10px" }}
-              >
-                <div className={styles.field}>{tech.field}</div>
-                <div
-                  className={styles.field_baseline}
-                  style={{ backgroundColor: tech.color }}
-                />
-              </div>
-            </div>
-            <div
-              className={styles.row_container}
+        <h1 className={styles.topic}>Tech Stack</h1>
+      </motion.div>
+
+      <motion.div
+        layout
+        className={`${styles.row_container} ${styles.tech_stack_container}`}
+        style={{
+          width: "100%",
+          gap: "10px",
+          flexWrap: "wrap",
+          y: "-100%",
+          opacity: 0,
+        }}
+        animate={controls__}
+      >
+        <LayoutGroup>
+          {techStack.map((tech, index) => (
+            <motion.div
+              whileHover={{ scaleX: 1.05 }}
+              transition={{ duration: 0.3 }}
+              layout
+              onHoverStart={() => {
+                setSelected(index);
+                console.log("hover");
+              }}
+              onHoverEnd={() => {
+                setSelected(-1);
+              }}
+              key={tech.field}
+              className={styles.column_container}
               style={{
-                alignItems: "center",
-                flexWrap: "wrap",
-                marginTop: "10px",
+                // width: index === selected ? "110px" : "auto",
+                flex: "1",
+                marginInline: index === selected ? "10px" : "0px",
+                minWidth: "350px",
+                borderRadius: "12px",
+                border: "1px solid #e0e0e0",
+                padding: "20px",
               }}
             >
-              {tech.languages.map((lang) => (
+              <div
+                className={styles.row_container}
+                style={{ alignItems: "center" }}
+              >
+                <img className={styles.fields_Img} src={tech.img} />
                 <div
-                  key={lang.lang}
-                  // className={styles.row_container}
-                  className={`${styles.row_container} ${styles.lang_box}`}
-                  style={{
-                    backgroundColor: tech.background,
-                    boxShadow: `0 0 20px 2px ${tech.color}`,
-                  }}
+                  className={styles.column_container}
+                  style={{ width: "auto", padding: "10px" }}
                 >
-                  <img
-                    className={styles.fields_Img}
-                    src={lang.img}
+                  <div className={styles.field}>{tech.field}</div>
+                  <div
+                    className={styles.field_baseline}
+                    style={{ backgroundColor: tech.color }}
+                  />
+                </div>
+              </div>
+              <div
+                className={styles.row_container}
+                style={{
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  marginTop: "10px",
+                }}
+              >
+                {tech.languages.map((lang) => (
+                  <div
+                    key={lang.lang}
+                    // className={styles.row_container}
+                    className={`${styles.row_container} ${styles.lang_box}`}
                     style={{
-                      width: "24px",
                       backgroundColor: tech.background,
                       boxShadow: `0 0 20px 2px ${tech.color}`,
                     }}
-                  />
-                  <div
-                    className={styles.tech_item}
-                    style={{
-                      color: tech.color,
-                    }}
                   >
-                    {lang.lang}
+                    <img
+                      className={styles.fields_Img}
+                      src={lang.img}
+                      style={{
+                        width: "24px",
+                        backgroundColor: tech.background,
+                        boxShadow: `0 0 20px 2px ${tech.color}`,
+                      }}
+                    />
+                    <div
+                      className={styles.tech_item}
+                      style={{
+                        color: tech.color,
+                      }}
+                    >
+                      {lang.lang}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </LayoutGroup>
+      </motion.div>
 
       <h1 className={styles.topic}>Experience</h1>
       {jobExperience.map((job) => (
