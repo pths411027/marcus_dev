@@ -203,7 +203,6 @@ export default function Profile() {
           <div className={styles.job_duration}>{job.duration}</div>
           <div className={styles.column_container}>
             <div className={styles.job_title}>{job.title}</div>
-            <div className={styles.job_des}>{job.des}</div>
             {job.descriptions.map((des, i) => (
               <div key={des} className={styles.job_des}>
                 {`${i + 1}.  ${des}`}
