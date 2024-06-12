@@ -99,7 +99,6 @@
 }
 .tool {
   font-size: 20px;
-
   margin-top: 20px;
 }
 
@@ -161,9 +160,9 @@
 }
 .job_des {
   margin-left: 20px;
-  font-size: 16px;
+  font-size: 18px;
   color: #808080;
-  margin-top: 20px;
+  margin-top: 10px;
   line-height: 20px;
   @media screen and (max-width: 768px) {
     width: 250px;
@@ -200,11 +199,11 @@
 .lang_box {
   align-items: center;
   gap: 8px;
-  padding: 5px 6px;
   border-radius: 10px;
   width: auto;
   flex-wrap: nowrap;
   font-size: 14px;
+  padding: 5px 10px;
   @media screen and (max-width: 768px) {
     font-size: 20px;
   }
