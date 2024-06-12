@@ -122,10 +122,12 @@ export default function Profile() {
               style={{
                 // width: index === selected ? "110px" : "auto",
                 flex: "1",
-                marginInline: index === selected ? "10px" : "0px",
+                marginInline: index === selected ? "12px" : "0px",
                 minWidth: "350px",
                 borderRadius: "12px",
-                border: "1px solid #e0e0e0",
+                // border: `1px solid #ffffff`,
+                boxShadow:
+                  index === selected ? `0 0 25px 2px ${tech.color}` : "",
                 padding: "20px",
               }}
             >
@@ -141,7 +143,10 @@ export default function Profile() {
                   <div className={styles.field}>{tech.field}</div>
                   <div
                     className={styles.field_baseline}
-                    style={{ backgroundColor: tech.color }}
+                    style={{
+                      backgroundColor: tech.color,
+                      // boxShadow: `0 0 20px 2px ${tech.color}`,
+                    }}
                   />
                 </div>
               </div>
@@ -160,7 +165,7 @@ export default function Profile() {
                     className={`${styles.row_container} ${styles.lang_box}`}
                     style={{
                       backgroundColor: tech.background,
-                      boxShadow: `0 0 20px 2px ${tech.color}`,
+                      // boxShadow: `0 0 20px 2px ${tech.color}`,
                     }}
                   >
                     <img
@@ -169,7 +174,7 @@ export default function Profile() {
                       style={{
                         width: "24px",
                         backgroundColor: tech.background,
-                        boxShadow: `0 0 20px 2px ${tech.color}`,
+                        // boxShadow: `0 0 20px 2px ${tech.color}`,
                       }}
                     />
                     <div
