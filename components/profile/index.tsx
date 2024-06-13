@@ -17,35 +17,25 @@ export default function Profile() {
   const controls = useAnimation();
   const imgControls = useAnimation();
   const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
-  const opacityInOut = useTransform(
-    scrollY,
-    [0, 10, 200, 201], // 定义滚动位置的范围
-    [1, 0, 0, 1] // 定义相应的透明度值
-  );
-  const scale = useTransform(scrollY, [0, 200, 201], [1, 30, 1]);
-  const opacity = useTransform(scrollY, [200, 201], [1, 0]);
-  const opacity_ = useTransform(scrollY, [50, 250], [0, 1]);
   const [animationExecuted, setAnimationExecuted] = useState(false);
   const controls_ = useAnimation();
   const controls__ = useAnimation();
+  const LIMIT = 200;
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // console.log(scrollY.getPrevious() - latest);
-    if (latest > 200)
-      // controls.start({ x: 0, opacity: 1, transition: { duration: 1.5 } });
+    if (latest > LIMIT)
       controls.start({
         x: "0",
         opacity: 1,
         transition: { duration: 0.5 },
-        // transform: "translateX(-50%)",
       });
-    if (latest > 100 && !animationExecuted) {
+    if (latest > LIMIT && !animationExecuted) {
       imgControls.start({
         scale: [1, 30, 1],
         transition: { times: [0, 0.99, 1] },
       });
       setAnimationExecuted(true);
     }
-    if (latest > 350) {
+    if (latest > LIMIT) {
       controls_
         .start({ y: "0", opacity: 1, transition: { duration: 0.5 } })
         .then(() => {
@@ -58,7 +48,7 @@ export default function Profile() {
     }
   });
   const [selected, setSelected] = useState(-1);
-  const scale_ = scrollY.get() > 0 ? scale : 1;
+
   return (
     <div className={styles.container}>
       <motion.img
@@ -101,6 +91,7 @@ export default function Profile() {
           flexWrap: "wrap",
           y: "-100%",
           opacity: 0,
+          alignItems: "stretch",
         }}
         animate={controls__}
       >
@@ -120,12 +111,10 @@ export default function Profile() {
               key={tech.field}
               className={styles.column_container}
               style={{
-                // width: index === selected ? "110px" : "auto",
                 flex: "1",
                 marginInline: index === selected ? "12px" : "0px",
                 minWidth: "350px",
                 borderRadius: "12px",
-                // border: `1px solid #ffffff`,
                 boxShadow:
                   index === selected ? `0 0 25px 2px ${tech.color}` : "",
                 padding: "20px",
@@ -161,11 +150,9 @@ export default function Profile() {
                 {tech.languages.map((lang) => (
                   <div
                     key={lang.lang}
-                    // className={styles.row_container}
                     className={`${styles.row_container} ${styles.lang_box}`}
                     style={{
-                      backgroundColor: tech.background,
-                      // boxShadow: `0 0 20px 2px ${tech.color}`,
+                      backgroundColor: tech.color,
                     }}
                   >
                     <img
@@ -180,7 +167,7 @@ export default function Profile() {
                     <div
                       className={styles.tech_item}
                       style={{
-                        color: tech.color,
+                        color: "#ffffff",
                       }}
                     >
                       {lang.lang}
