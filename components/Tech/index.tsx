@@ -13,41 +13,7 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 
-export default function Tech() {
-  const { scrollY } = useScroll();
-  const controls = useAnimation();
-  const imgControls = useAnimation();
-  const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
-  const [animationExecuted, setAnimationExecuted] = useState(false);
-  const controls_ = useAnimation();
-  const controls__ = useAnimation();
-  const LIMIT = 200;
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > LIMIT)
-      controls.start({
-        x: "0",
-        opacity: 1,
-        transition: { duration: 0.5 },
-      });
-    if (latest > LIMIT && !animationExecuted) {
-      imgControls.start({
-        scale: [1, 30, 1],
-        transition: { times: [0, 0.99, 1] },
-      });
-      setAnimationExecuted(true);
-    }
-    if (latest > LIMIT) {
-      controls_
-        .start({ y: "0", opacity: 1, transition: { duration: 0.5 } })
-        .then(() => {
-          controls__.start({
-            y: "0",
-            opacity: 1,
-            transition: { duration: 0.5 },
-          });
-        });
-    }
-  });
+export default function Tech({ controls_, controls__ }) {
   const [selected, setSelected] = useState(-1);
 
   return (
@@ -100,9 +66,6 @@ export default function Tech() {
                 marginInline: index === selected ? "12px" : "0px",
                 minWidth: "350px",
                 borderRadius: "12px",
-                // boxShadow:
-                //   index === selected ? `0 0 25px 2px ${tech.color}` : "",
-
                 padding: "20px",
               }}
             >

@@ -4,6 +4,12 @@ import Profile from "../components/profile";
 import Job from "../components/Job";
 import Tech from "../components/Tech";
 import { useEffect, useState } from "react";
+import {
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  useAnimation,
+} from "framer-motion";
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
 
@@ -11,6 +17,64 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
+  const { scrollY } = useScroll();
+  const controls = useAnimation();
+  const controls_ = useAnimation();
+  const controls__ = useAnimation();
+  const imgControls = useAnimation();
+  const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
+  const [animationExecuted, setAnimationExecuted] = useState(false);
+
+  const LIMIT = 200;
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > LIMIT && !animationExecuted) {
+      imgControls
+        .start({
+          scale: [1, 30, 1],
+          transition: { duration: 0.5, times: [0, 0.99, 1] },
+        })
+        .then(() => {
+          controls
+            .start({
+              x: "0",
+              opacity: 1,
+              transition: { duration: 0.5 },
+            })
+            .then(() => {
+              controls_
+                .start({
+                  y: "0",
+                  opacity: 1,
+                  transition: { duration: 0.5 },
+                })
+                .then(() => {
+                  controls__.start({
+                    y: "0",
+                    opacity: 1,
+                    transition: { duration: 0.5 },
+                  });
+                });
+            });
+        });
+
+      // })
+      // .then(() => {
+      //   controls_.start({
+      //     y: "0",
+      //     opacity: 1,
+      //     transition: { duration: 15 },
+      //   });
+      // })
+      // .then(() => {
+      //   controls__.start({
+      //     y: "0",
+      //     opacity: 1,
+      //     transition: { duration: 0.5 },
+      //   });
+      // });
+      setAnimationExecuted(true);
+    }
+  });
   if (!isClient) {
     return null; // 或者返回一个加载指示器
   }
@@ -22,8 +86,12 @@ export default function Home() {
       </Head>
 
       <main>
-        <Profile />
-        <Tech />
+        <Profile
+          imgControls={imgControls}
+          controls={controls}
+          marginTop={marginTop}
+        />
+        <Tech controls_={controls_} controls__={controls__} />
         <Job />
       </main>
 

@@ -7,30 +7,7 @@ import {
   useMotionValueEvent,
   useAnimation,
 } from "framer-motion";
-export default function Profile() {
-  const { scrollY } = useScroll();
-  const controls = useAnimation();
-  const imgControls = useAnimation();
-  const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
-  const [animationExecuted, setAnimationExecuted] = useState(false);
-
-  const LIMIT = 200;
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > LIMIT)
-      controls.start({
-        x: "0",
-        opacity: 1,
-        transition: { duration: 0.5 },
-      });
-    if (latest > LIMIT && !animationExecuted) {
-      imgControls.start({
-        scale: [1, 30, 1],
-
-        transition: { duration: 1.5, times: [0, 0.99, 1] },
-      });
-      setAnimationExecuted(true);
-    }
-  });
+export default function Profile({ imgControls, controls, marginTop }) {
   const [selectedId, setSelectedId] = useState(null);
   return (
     <div className={styles.container} onClick={() => setSelectedId(null)}>
