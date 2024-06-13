@@ -12,7 +12,7 @@ import {
   useAnimation,
 } from "framer-motion";
 import { useEffect } from "react";
-import TechBox from "./techBox";
+
 export default function Tech() {
   const { scrollY } = useScroll();
   const controls = useAnimation();
@@ -73,97 +73,96 @@ export default function Tech() {
         animate={controls__}
       >
         <LayoutGroup>
-          {techStack.map((tech, index) =>
-            // <motion.div
-            //   whileHover={{
-            //     scaleX: 1.05,
-            //     transformOrigin: "center",
-            //   }}
-            //   transition={{ duration: 0.3 }}
-            //   layout
-            //   onHoverStart={() => {
-            //     setSelected(index);
-            //     console.log("hover");
-            //   }}
-            //   onHoverEnd={() => {
-            //     setSelected(-1);
-            //   }}
-            //   animate={{
-            //     boxShadow:
-            //       index === selected ? `0 0 25px 2px ${tech.color}` : "",
-            //     transition: { duration: 0.3 },
-            //   }}
-            //   key={tech.field}
-            //   className={styles.column_container}
-            //   style={{
-            //     flex: "1",
-            //     marginInline: index === selected ? "12px" : "0px",
-            //     minWidth: "350px",
-            //     borderRadius: "12px",
-            //     // boxShadow:
-            //     //   index === selected ? `0 0 25px 2px ${tech.color}` : "",
+          {techStack.map((tech, index) => (
+            <motion.div
+              whileHover={{
+                scaleX: 1.05,
+                transformOrigin: "center",
+              }}
+              transition={{ duration: 0.3 }}
+              layout
+              onHoverStart={() => {
+                setSelected(index);
+                console.log("hover");
+              }}
+              onHoverEnd={() => {
+                setSelected(-1);
+              }}
+              animate={{
+                boxShadow:
+                  index === selected ? `0 0 25px 2px ${tech.color}` : "",
+                transition: { duration: 0.3 },
+              }}
+              key={tech.field}
+              className={styles.column_container}
+              style={{
+                flex: "1",
+                marginInline: index === selected ? "12px" : "0px",
+                minWidth: "350px",
+                borderRadius: "12px",
+                // boxShadow:
+                //   index === selected ? `0 0 25px 2px ${tech.color}` : "",
 
-            //     padding: "20px",
-            //   }}
-            // >
-            //   <div
-            //     className={styles.row_container}
-            //     style={{ alignItems: "center" }}
-            //   >
-            //     <img className={styles.fields_Img} src={tech.img} />
-            //     <div
-            //       className={styles.column_container}
-            //       style={{ width: "auto", padding: "10px" }}
-            //     >
-            //       <div className={styles.field}>{tech.field}</div>
-            //       <div
-            //         className={styles.field_baseline}
-            //         style={{
-            //           backgroundColor: tech.color,
-            //           // boxShadow: `0 0 20px 2px ${tech.color}`,
-            //         }}
-            //       />
-            //     </div>
-            //   </div>
-            //   <div
-            //     className={styles.row_container}
-            //     style={{
-            //       alignItems: "center",
-            //       flexWrap: "wrap",
-            //       marginTop: "10px",
-            //     }}
-            //   >
-            //     {tech.languages.map((lang) => (
-            //       <div
-            //         key={lang.lang}
-            //         className={`${styles.row_container} ${styles.lang_box}`}
-            //         style={{
-            //           backgroundColor: tech.color,
-            //         }}
-            //       >
-            //         <img
-            //           className={styles.fields_Img}
-            //           src={lang.img}
-            //           style={{
-            //             width: "24px",
-            //             backgroundColor: tech.background,
-            //             // boxShadow: `0 0 20px 2px ${tech.color}`,
-            //           }}
-            //         />
-            //         <div
-            //           className={styles.tech_item}
-            //           style={{
-            //             color: "#ffffff",
-            //           }}
-            //         >
-            //           {lang.lang}
-            //         </div>
-            //       </div>
-            //     ))}
-            //   </div>
-            // </motion.div>
-            TechBox(index, tech, selected, setSelected)
-          )}
+                padding: "20px",
+              }}
+            >
+              <div
+                className={styles.row_container}
+                style={{ alignItems: "center" }}
+              >
+                <img className={styles.fields_Img} src={tech.img} />
+                <div
+                  className={styles.column_container}
+                  style={{ width: "auto", padding: "10px" }}
+                >
+                  <div className={styles.field}>{tech.field}</div>
+                  <div
+                    className={styles.field_baseline}
+                    style={{
+                      backgroundColor: tech.color,
+                      // boxShadow: `0 0 20px 2px ${tech.color}`,
+                    }}
+                  />
+                </div>
+              </div>
+              <div
+                className={styles.row_container}
+                style={{
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  marginTop: "10px",
+                }}
+              >
+                {tech.languages.map((lang) => (
+                  <div
+                    key={lang.lang}
+                    className={`${styles.row_container} ${styles.lang_box}`}
+                    style={{
+                      backgroundColor: tech.color,
+                    }}
+                  >
+                    <img
+                      className={styles.fields_Img}
+                      src={lang.img}
+                      style={{
+                        width: "24px",
+                        backgroundColor: tech.background,
+                        // boxShadow: `0 0 20px 2px ${tech.color}`,
+                      }}
+                    />
+                    <div
+                      className={styles.tech_item}
+                      style={{
+                        color: "#ffffff",
+                      }}
+                    >
+                      {lang.lang}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </LayoutGroup>
       </motion.div>
     </div>
