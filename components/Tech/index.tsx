@@ -14,7 +14,6 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 import TechBox from "./techBox";
-import dynamic from "next/dynamic";
 export default function Tech() {
   const { scrollY } = useScroll();
   const controls = useAnimation();
