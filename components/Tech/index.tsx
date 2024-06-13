@@ -10,7 +10,6 @@ import {
   scroll,
   useMotionValueEvent,
   useAnimation,
-  AnimatePresence,
 } from "framer-motion";
 import { useEffect } from "react";
 import TechBox from "./techBox";
