@@ -26,52 +26,38 @@ export default function Home() {
   const [animationExecuted, setAnimationExecuted] = useState(false);
 
   const LIMIT = 200;
+  const Duration = 0.3;
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > LIMIT && !animationExecuted) {
+    if (latest > 0 && !animationExecuted) {
+      window.scrollTo({ top: 0, behavior: "instant" });
       imgControls
         .start({
           scale: [1, 30, 1],
-          transition: { duration: 0.5, times: [0, 0.99, 1] },
+          transition: { duration: Duration, times: [0, 0.99, 1] },
         })
         .then(() => {
           controls
             .start({
               x: "0",
               opacity: 1,
-              transition: { duration: 0.5 },
+              transition: { duration: Duration },
             })
             .then(() => {
               controls_
                 .start({
                   y: "0",
                   opacity: 1,
-                  transition: { duration: 0.5 },
+                  transition: { duration: Duration },
                 })
                 .then(() => {
                   controls__.start({
                     y: "0",
                     opacity: 1,
-                    transition: { duration: 0.5 },
+                    transition: { duration: Duration },
                   });
                 });
             });
         });
-
-      // })
-      // .then(() => {
-      //   controls_.start({
-      //     y: "0",
-      //     opacity: 1,
-      //     transition: { duration: 15 },
-      //   });
-      // })
-      // .then(() => {
-      //   controls__.start({
-      //     y: "0",
-      //     opacity: 1,
-      //     transition: { duration: 0.5 },
-      //   });
-      // });
       setAnimationExecuted(true);
     }
   });
