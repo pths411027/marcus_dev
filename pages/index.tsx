@@ -62,7 +62,7 @@ export default function Home() {
     }
   });
   if (!isClient) {
-    return null; // 或者返回一个加载指示器
+    return null;
   }
   return (
     <div className={styles.container}>
