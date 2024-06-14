@@ -42,24 +42,41 @@ export default function Project({ controls____ }) {
                 setSelected(index + 1);
               }}
             >
-              <div
+              <motion.div
+                layoutId={`container-${index + 1}`}
                 className={styles.column_container}
                 style={{ width: "300px" }}
               >
-                <div className={styles.job_title}>{job.title}</div>
-                {job.descriptions.map((des, i) => (
-                  <div key={des} className={styles.job_des}>
-                    {`${i + 1}.  ${des}`}
-                  </div>
+                <motion.div
+                  layoutId={`job-${index + 1}`}
+                  className={styles.job_title}
+                >
+                  {job.title}
+                </motion.div>
+                {job.descriptions.map((des, desIndex) => (
+                  <motion.div
+                    layoutId={`des-${index + 1}-${desIndex + 1}`}
+                    key={des}
+                    className={styles.job_des}
+                  >
+                    {`${index + 1}.  ${des}`}
+                  </motion.div>
                 ))}
-                <div className={`${styles.row_container} ${styles.job_skills}`}>
-                  {job.tech.map((skill) => (
-                    <div key={skill} className={styles.job_skill}>
+                <motion.div
+                  layoutId={`skills-${index + 1}`}
+                  className={`${styles.row_container} ${styles.job_skills}`}
+                >
+                  {job.tech.map((skill, skillIndex) => (
+                    <motion.div
+                      layoutId={`skill-${index + 1}-${skillIndex + 1}`}
+                      key={skill}
+                      className={styles.job_skill}
+                    >
                       {skill}
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -86,21 +103,40 @@ export default function Project({ controls____ }) {
               }}
               onClick={() => setSelected(-1)}
             >
-              <div className={styles.column_container}>
-                <div className={styles.job_title}>{project.title}</div>
-                {project.descriptions.map((des, i) => (
-                  <div key={des} className={styles.job_des}>
-                    {`${i + 1}.  ${des}`}
-                  </div>
+              <motion.div
+                layoutId={`container-${selected}`}
+                className={styles.column_container}
+              >
+                <motion.div
+                  layoutId={`job-${selected}`}
+                  className={styles.job_title}
+                >
+                  {project.title}
+                </motion.div>
+                {project.descriptions.map((des, desIndex) => (
+                  <motion.div
+                    layoutId={`des-${selected}-${desIndex + 1}`}
+                    key={des}
+                    className={styles.job_des}
+                  >
+                    {`${selected + 1}.  ${des}`}
+                  </motion.div>
                 ))}
-                <div className={`${styles.row_container} ${styles.job_skills}`}>
-                  {project.tech.map((skill) => (
-                    <div key={skill} className={styles.job_skill}>
+                <motion.div
+                  layoutId={`skills-${selected}`}
+                  className={`${styles.row_container} ${styles.job_skills}`}
+                >
+                  {project.tech.map((skill, skillIndex) => (
+                    <motion.div
+                      layoutId={`skill-${selected}-${skillIndex + 1}`}
+                      key={skill}
+                      className={styles.job_skill}
+                    >
                       {skill}
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
