@@ -47,13 +47,8 @@ export default function Tech({ controls_, controls__ }) {
               }}
               transition={{ duration: 0.3 }}
               layout
-              onHoverStart={() => {
-                setSelected(index);
-                console.log("hover");
-              }}
-              onHoverEnd={() => {
-                setSelected(-1);
-              }}
+              onHoverStart={() => setSelected(index)}
+              onHoverEnd={() => setSelected(-1)}
               animate={{
                 boxShadow:
                   index === selected ? `0 0 25px 2px ${tech.color}` : "",
