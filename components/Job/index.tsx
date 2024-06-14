@@ -13,11 +13,15 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useEffect } from "react";
-export default function Job() {
+export default function Job({ controls___ }) {
   const { scrollY } = useScroll();
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      animate={controls___}
+      className={styles.container}
+      style={{ opacity: 0 }}
+    >
       <h1 className={styles.topic}>Experience</h1>
 
       {jobExperience.map((job, index) => (
@@ -45,6 +49,6 @@ export default function Job() {
           </div>
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

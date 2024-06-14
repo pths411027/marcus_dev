@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import Profile from "../components/profile";
 import Job from "../components/Job";
 import Tech from "../components/Tech";
+import Project from "../components/Project";
 import { useEffect, useState } from "react";
 import {
   useScroll,
@@ -21,6 +22,8 @@ export default function Home() {
   const controls = useAnimation();
   const controls_ = useAnimation();
   const controls__ = useAnimation();
+  const controls___ = useAnimation();
+  const controls____ = useAnimation();
   const imgControls = useAnimation();
   const marginTop = useTransform(scrollY, [0, 200], [0, 200]);
   const [animationExecuted, setAnimationExecuted] = useState(false);
@@ -60,6 +63,19 @@ export default function Home() {
         });
       setAnimationExecuted(true);
     }
+    if (latest > 300) {
+      controls___
+        .start({
+          opacity: 1,
+          transition: { duration: Duration, delay: 0.1 },
+        })
+        .then(() => {
+          controls____.start({
+            opacity: 1,
+            transition: { duration: Duration },
+          });
+        });
+    }
   });
   if (!isClient) {
     return null;
@@ -78,7 +94,8 @@ export default function Home() {
           marginTop={marginTop}
         />
         <Tech controls_={controls_} controls__={controls__} />
-        <Job />
+        <Job controls___={controls___} />
+        <Project controls____={controls____} />
       </main>
 
       <footer>
