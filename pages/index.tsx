@@ -11,6 +11,7 @@ import {
   useMotionValueEvent,
   useAnimation,
 } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
 
