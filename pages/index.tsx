@@ -89,6 +89,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <Analytics />
         <Profile
           imgControls={imgControls}
           controls={controls}
