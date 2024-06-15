@@ -30,7 +30,7 @@ export default function Item({ job, index, selected, setSelected }) {
         if (selected !== -1) return;
         setIsHover(true);
         videoControls.start({
-          opacity: 0.7,
+          opacity: 0.8,
         });
         controls.start({
           opacity: 1,
