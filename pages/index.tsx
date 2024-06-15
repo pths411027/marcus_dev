@@ -4,6 +4,7 @@ import Profile from "../components/profile";
 import Job from "../components/Job";
 import Tech from "../components/Tech";
 import Project from "../components/Project";
+import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import {
   useScroll,
@@ -97,7 +98,9 @@ export default function Home() {
         />
         <Tech controls_={controls_} controls__={controls__} />
         <Job controls___={controls___} />
+
         <Project controls____={controls____} />
+        <Card />
       </main>
 
       <footer>
