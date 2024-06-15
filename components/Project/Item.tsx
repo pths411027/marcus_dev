@@ -84,7 +84,7 @@ export default function Item({ job, index, selected, setSelected }) {
         className={styles.project_video + " " + (isHover ? styles.hover : "")}
         layoutId={`project-video-${index}`}
         ref={videoRef}
-        src="12345.mov"
+        src="567.mov"
         muted
         onLoadedData={() => {
           if (videoRef.current) {

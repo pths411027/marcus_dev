@@ -115,7 +115,7 @@ export default function Project({ controls____ }) {
                 <motion.video
                   layoutId={`video-${selected}`}
                   ref={videoRef}
-                  src="12345.mov"
+                  src="567.mov"
                   muted
                   loop
                   className={`${styles.project_video} ${styles.open}`}
