@@ -6,12 +6,24 @@ import {
   useSpring,
   useDragControls,
 } from "framer-motion";
+import Typewriter from "react-typewriter-effect";
 import styles from "./Card.module.css";
 
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
 export default function Card() {
+  const texts = [
+    "Hey, I'm Marcus, Nice to meet you~",
+    "------------------------------------------------------------------------",
+    "cd your_mac",
+    "~/your_mac",
+    "% npm install marcus.dev.website",
+    "added 22 packages in 3s",
+    "4 packages are looking for funding",
+    "run `npm fund` for details",
+    "~/your_mac took 3s",
+  ];
   const parentRef = useRef(null);
   const inputRef = useRef(null);
   const ref = useRef(null);
@@ -21,9 +33,9 @@ export default function Card() {
 
   const xSpring = useSpring(x);
   const ySpring = useSpring(y);
-  const [isClick, setIsClick] = useState(false);
+
   const handleMouseMove = (e) => {
-    if (!ref.current || isClick) return;
+    if (!ref.current) return;
     inputRef.current.focus();
     const rect = ref.current.getBoundingClientRect();
 
@@ -41,7 +53,7 @@ export default function Card() {
   };
 
   const handleMouseLeave = () => {
-    if (!ref.current || isClick) return;
+    if (!ref.current) return;
     x.set(0);
     y.set(0);
   };
@@ -67,7 +79,7 @@ export default function Card() {
         onClick={() => inputRef.current.focus()}
         style={{
           transformStyle: "preserve-3d",
-          transform: isClick ? "" : transform,
+          transform,
           width: "80%",
           minHeight: "400px",
           height: "400px",
@@ -118,15 +130,15 @@ export default function Card() {
             >
               <div
                 className={styles.mac_button}
-                style={{ backgroundColor: "red" }}
+                style={{ backgroundColor: "#fb4947" }}
               />
               <div
                 className={styles.mac_button}
-                style={{ backgroundColor: "yellow" }}
+                style={{ backgroundColor: "#fdb324" }}
               />
               <div
                 className={styles.mac_button}
-                style={{ backgroundColor: "green" }}
+                style={{ backgroundColor: "#29c232" }}
               />
             </div>
           </div>
@@ -146,21 +158,42 @@ export default function Card() {
             <div>
               ------------------------------------------------------------------------
             </div>
-            <div>~</div>
-            <div>npm install you email!!!</div>
-            <input
-              className={styles.Input}
-              ref={inputRef}
-              placeholder="npm install your-email"
-              style={{
-                background: "none",
-                border: "none",
-                outline: "none",
-                color: "white",
-                fontSize: "20px",
-                fontFamily: "monospace",
-              }}
-            ></input>
+            <div className={styles.row_container} style={{ gap: "10px" }}>
+              <div style={{ color: "#2eb41d" }}>cd</div>
+              <div style={{ color: "white" }}>your_mac</div>
+            </div>
+            <div style={{ display: "inline-", color: "#2eb41d" }}>
+              ~/your_mac
+            </div>
+            <div className={styles.row_container} style={{ gap: "10px" }}>
+              <div style={{ color: "#2eb41d" }}>% npm</div>
+              <div style={{ color: "white" }}>install marcus.dev.website</div>
+            </div>
+            <div style={{ marginTop: "12px" }}>added 22 packages in 3s</div>
+            <div>4 packages are looking for funding</div>
+            <div style={{ marginBottom: "12px" }}>
+              run `npm fund` for details
+            </div>
+            <div className={styles.row_container} style={{ gap: "10px" }}>
+              <div style={{ color: "#31afbb" }}>~/your_mac</div>
+              <div style={{ color: "white" }}>took 3s</div>
+              <div style={{ color: "#9ea01d" }}>took 3s</div>
+            </div>
+            <div className={styles.row_container} style={{ gap: "10px" }}>
+              <div style={{ display: "inline-", color: "#2eb41d" }}>~</div>
+              <input
+                className={styles.Input}
+                ref={inputRef}
+                placeholder="npm install your-email"
+                style={{
+                  background: "none",
+                  border: "none",
+                  outline: "none",
+                  fontSize: "20px",
+                  fontFamily: "monospace",
+                }}
+              ></input>
+            </div>
           </div>
         </div>
       </motion.div>
