@@ -1,4 +1,5 @@
 export const selfIntro = [
+  300,
   "Hi, I'm Marcus Tsai",
   1000,
   "a frontend engineer now working for Shopee.",
