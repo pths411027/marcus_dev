@@ -3,6 +3,7 @@ export const HEAD = {
   description: "Frontend Developer Marcus Tsai's personal blog",
   favicon: "/favicon.png",
 };
+export const IMG = "img.png";
 const DURATION = 0.3;
 const DELAY = 0.1;
 interface DisplayEffect {

@@ -1,6 +1,12 @@
-import { color } from "framer-motion";
-import { text } from "stream/consumers";
-
+export const selfIntro = [
+  "Hi, I'm Marcus Tsai",
+  1000,
+  "a frontend engineer now working for Shopee.",
+  1000,
+  "I contribute to the development of web applications though React, TS and Css Modules!",
+  1000,
+  "Hi, I'm Marcus Tsai, a frontend engineer! 🫃🏻",
+];
 export const jobExperience = [
   {
     duration: "2023/07 - Present",
