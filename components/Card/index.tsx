@@ -1,14 +1,11 @@
 "use client";
-import { TypeAnimation } from "react-type-animation";
 import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
   useSpring,
-  useDragControls,
 } from "framer-motion";
-import TypeWriterEffect from "react-typewriter-effect";
 
 import styles from "./Card.module.css";
 import { terminalText } from "../../config/text";
