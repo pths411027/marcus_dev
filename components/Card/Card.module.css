@@ -1,6 +1,5 @@
 .container {
   padding: 100px;
-
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -52,14 +51,27 @@
   text-decoration: underline;
   text-decoration-color: rgb(255, 165, 0, 0.4);
   color: #ffa500;
-  /* color: #9ea01d; */
   font-size: 20px;
   font-weight: bold;
   font-family: monospace;
   outline: none;
-  width: auto;
   caret-color: #ffa500;
 }
 .Input::placeholder {
   color: rgb(255, 165, 0, 0.4);
+}
+.Input:invalid {
+  border-bottom: none;
+}
+.custom_type_animation_cursor {
+  display: inline;
+}
+.custom_type_animation_cursor::after {
+  content: "|";
+  animation: cursor 1.1s infinite step-start;
+}
+@keyframes cursor {
+  50% {
+    opacity: 0;
+  }
 }

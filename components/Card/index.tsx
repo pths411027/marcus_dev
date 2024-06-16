@@ -1,3 +1,5 @@
+"use client";
+import { TypeAnimation } from "react-type-animation";
 import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
@@ -6,26 +8,26 @@ import {
   useSpring,
   useDragControls,
 } from "framer-motion";
-import Typewriter from "react-typewriter-effect";
-import styles from "./Card.module.css";
+import TypeWriterEffect from "react-typewriter-effect";
 
+import styles from "./Card.module.css";
+import { terminalText } from "../../config/text";
+import TypingBox from "./TypingBox";
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
 export default function Card() {
-  const texts = [
-    "Hey, I'm Marcus, Nice to meet you~",
-    "------------------------------------------------------------------------",
-    "cd your_mac",
-    "~/your_mac",
-    "% npm install marcus.dev.website",
-    "added 22 packages in 3s",
-    "4 packages are looking for funding",
-    "run `npm fund` for details",
-    "~/your_mac took 3s",
-  ];
+  const [startTyping, setStartTyping] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+  const handleTypingComplete = () => {
+    if (currentTextIndex < terminalText.length - 1) {
+      setCurrentTextIndex(currentTextIndex + 1);
+    }
+  };
+
   const parentRef = useRef(null);
-  const inputRef = useRef(null);
+
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -36,7 +38,7 @@ export default function Card() {
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
-    inputRef.current.focus();
+
     const rect = ref.current.getBoundingClientRect();
 
     const width = rect.width;
@@ -50,16 +52,22 @@ export default function Card() {
 
     x.set(rX);
     y.set(rY);
+
+    setStartTyping(true);
   };
 
   const handleMouseLeave = () => {
     if (!ref.current) return;
     x.set(0);
     y.set(0);
+    setStartTyping(true);
   };
 
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
-
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   return (
     <motion.div
       ref={parentRef}
@@ -76,7 +84,6 @@ export default function Card() {
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        onClick={() => inputRef.current.focus()}
         style={{
           transformStyle: "preserve-3d",
           transform,
@@ -154,46 +161,7 @@ export default function Card() {
               fontWeight: "bold",
             }}
           >
-            <div>Hey, I'm Marcus, Nice to meet you~</div>
-            <div>
-              ------------------------------------------------------------------------
-            </div>
-            <div className={styles.row_container} style={{ gap: "10px" }}>
-              <div style={{ color: "#2eb41d" }}>cd</div>
-              <div style={{ color: "white" }}>your_mac</div>
-            </div>
-            <div style={{ display: "inline-", color: "#2eb41d" }}>
-              ~/your_mac
-            </div>
-            <div className={styles.row_container} style={{ gap: "10px" }}>
-              <div style={{ color: "#2eb41d" }}>% npm</div>
-              <div style={{ color: "white" }}>install marcus.dev.website</div>
-            </div>
-            <div style={{ marginTop: "12px" }}>added 22 packages in 3s</div>
-            <div>4 packages are looking for funding</div>
-            <div style={{ marginBottom: "12px" }}>
-              run `npm fund` for details
-            </div>
-            <div className={styles.row_container} style={{ gap: "10px" }}>
-              <div style={{ color: "#31afbb" }}>~/your_mac</div>
-              <div style={{ color: "white" }}>took 3s</div>
-              <div style={{ color: "#9ea01d" }}>took 3s</div>
-            </div>
-            <div className={styles.row_container} style={{ gap: "10px" }}>
-              <div style={{ display: "inline-", color: "#2eb41d" }}>~</div>
-              <input
-                className={styles.Input}
-                ref={inputRef}
-                placeholder="npm install your-email"
-                style={{
-                  background: "none",
-                  border: "none",
-                  outline: "none",
-                  fontSize: "20px",
-                  fontFamily: "monospace",
-                }}
-              ></input>
-            </div>
+            {startTyping && <TypingBox />}
           </div>
         </div>
       </motion.div>

@@ -1,4 +1,5 @@
 import { color } from "framer-motion";
+import { text } from "stream/consumers";
 
 export const jobExperience = [
   {
@@ -78,5 +79,102 @@ export const techStack = [
     ],
     color: "rgb(255, 160, 122)",
     background: "rgba(255, 160, 122, 0.3)",
+  },
+];
+
+export const terminalText = [
+  {
+    type: "text",
+    text: "Hey, I'm Marcus, Nice to meet you~",
+    color: "white",
+  },
+  {
+    type: "delete",
+    text: [
+      "I used to be a Data analyst",
+      "After that, I became a Backend Dev, doing Python, FastAPI, MySql",
+      "After that, Now, I'm a Frontend Dev, doing React, TypeScript, Css Modules",
+    ],
+    color: "#c815c8",
+  },
+  {
+    type: "text",
+    text: "----------------------------------------------",
+    color: "white",
+  },
+  {
+    type: "texts",
+    subText: [
+      {
+        type: "text",
+        text: "cd",
+        color: "#2eb41d",
+      },
+      {
+        type: "text",
+        text: "your_mac",
+        color: "#ffffff",
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "~/your_mac",
+    color: "#2eb41d",
+  },
+  {
+    type: "texts",
+    subText: [
+      {
+        type: "text",
+        text: "% npm",
+        color: "#2eb41d",
+      },
+      {
+        type: "text",
+        text: "install",
+        color: "#ffffff",
+      },
+      {
+        type: "text",
+        text: "marcus.tsai.dev website pkg --save",
+        color: "#ffffff",
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "added 22 packages in 3s",
+    color: "#ffffff",
+  },
+  {
+    type: "text",
+    text: "4 packages are looking for funding",
+    color: "#ffffff",
+  },
+  {
+    type: "text",
+    text: "run `npm fund` for details",
+    color: "#ffffff",
+  },
+  {
+    type: "texts",
+    subText: [
+      {
+        type: "text",
+        text: "~/your_mac",
+        color: "#31afbb",
+      },
+      {
+        type: "text",
+        text: "took",
+        color: "#ffffff",
+      },
+      {
+        type: "text",
+        text: "10s",
+        color: "#9ea01d",
+      },
+    ],
   },
 ];
