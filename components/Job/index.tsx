@@ -13,12 +13,12 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useEffect } from "react";
-export default function Job({ controls___ }) {
+export default function Job({ controls }) {
   const { scrollY } = useScroll();
 
   return (
     <motion.div
-      animate={controls___}
+      animate={controls}
       className={styles.container}
       style={{ opacity: 0 }}
     >

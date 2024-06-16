@@ -1,21 +1,18 @@
 import { useState } from "react";
 import styles from "./profile.module.css";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-  useAnimation,
-} from "framer-motion";
-export default function Profile({ imgControls, controls, marginTop }) {
-  const [selectedId, setSelectedId] = useState(null);
+import { motion } from "framer-motion";
+export default function Profile({
+  imgControls,
+  contentControls,
+  marginTopControls,
+}) {
   return (
-    <div className={styles.container} onClick={() => setSelectedId(null)}>
+    <div className={styles.container}>
       <motion.img
         animate={imgControls}
         className={styles.img}
         src="123.png"
-        style={{ marginTop }}
+        style={{ marginTop: marginTopControls }}
       />
 
       <motion.div className={styles.name}>
@@ -24,7 +21,7 @@ export default function Profile({ imgControls, controls, marginTop }) {
       </motion.div>
 
       <motion.div
-        animate={controls}
+        animate={contentControls}
         style={{ opacity: 0, x: "-100%", width: "100%" }}
       >
         <h1 className={styles.name}>Biography</h1>

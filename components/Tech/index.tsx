@@ -1,26 +1,15 @@
 import { useState } from "react";
 import styles from "./Tech.module.css";
-import { jobExperience, techStack } from "../../config/text";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  LayoutGroup,
-  scroll,
-  useMotionValueEvent,
-  useAnimation,
-} from "framer-motion";
-import { useEffect } from "react";
-
-export default function Tech({ controls_, controls__ }) {
+import { techStack } from "../../config/text";
+import { motion, LayoutGroup } from "framer-motion";
+import TechItem from "./TechItem";
+export default function Tech({ titleControls, contentControls }) {
   const [selected, setSelected] = useState(-1);
-
   return (
     <div className={styles.container}>
       <motion.div
         className={styles.topic}
-        animate={controls_}
+        animate={titleControls}
         style={{ y: "-100%", opacity: 0 }}
       >
         <h1 className={styles.topic}>Tech Stack</h1>
@@ -36,90 +25,17 @@ export default function Tech({ controls_, controls__ }) {
           opacity: 0,
           alignItems: "stretch",
         }}
-        animate={controls__}
+        animate={contentControls}
       >
         <LayoutGroup>
           {techStack.map((tech, index) => (
-            <motion.div
-              whileHover={{
-                scaleX: 1.05,
-                transformOrigin: "center",
-              }}
-              transition={{ duration: 0.3 }}
-              layout
-              onHoverStart={() => setSelected(index)}
-              onHoverEnd={() => setSelected(-1)}
-              animate={{
-                boxShadow:
-                  index === selected ? `0 0 25px 2px ${tech.color}` : "",
-                transition: { duration: 0.3 },
-              }}
-              key={tech.field}
-              className={styles.column_container}
-              style={{
-                flex: "1",
-                marginInline: index === selected ? "12px" : "0px",
-                minWidth: "350px",
-                borderRadius: "12px",
-                padding: "20px",
-              }}
-            >
-              <div
-                className={styles.row_container}
-                style={{ alignItems: "center" }}
-              >
-                <img className={styles.fields_Img} src={tech.img} />
-                <div
-                  className={styles.column_container}
-                  style={{ width: "auto", padding: "10px" }}
-                >
-                  <div className={styles.field}>{tech.field}</div>
-                  <div
-                    className={styles.field_baseline}
-                    style={{
-                      backgroundColor: tech.color,
-                      // boxShadow: `0 0 20px 2px ${tech.color}`,
-                    }}
-                  />
-                </div>
-              </div>
-              <div
-                className={styles.row_container}
-                style={{
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                  marginTop: "10px",
-                }}
-              >
-                {tech.languages.map((lang) => (
-                  <div
-                    key={lang.lang}
-                    className={`${styles.row_container} ${styles.lang_box}`}
-                    style={{
-                      backgroundColor: tech.color,
-                    }}
-                  >
-                    <img
-                      className={styles.fields_Img}
-                      src={lang.img}
-                      style={{
-                        width: "24px",
-                        backgroundColor: tech.background,
-                        // boxShadow: `0 0 20px 2px ${tech.color}`,
-                      }}
-                    />
-                    <div
-                      className={styles.tech_item}
-                      style={{
-                        color: "#ffffff",
-                      }}
-                    >
-                      {lang.lang}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+            <TechItem
+              key={index}
+              index={index}
+              tech={tech}
+              selected={selected}
+              setSelected={setSelected}
+            />
           ))}
         </LayoutGroup>
       </motion.div>

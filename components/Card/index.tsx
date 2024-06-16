@@ -75,6 +75,7 @@ export default function Card() {
       style={{
         position: "relative",
         backgroundImage: "url('./10.png')",
+
         backgroundSize: "cover",
         alignItems: "center",
       }}

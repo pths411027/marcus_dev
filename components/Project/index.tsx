@@ -1,61 +1,29 @@
 import { useState } from "react";
 import styles from "./Project.module.css";
-import { jobExperience, techStack } from "../../config/text";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  LayoutGroup,
-  scroll,
-  useMotionValueEvent,
-  useAnimation,
-  AnimatePresence,
-} from "framer-motion";
+import { jobExperience } from "../../config/text";
+import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import Item from "./Item";
 import { useEffect, useRef } from "react";
-export default function Project({ controls____ }) {
-  const { scrollY } = useScroll();
-  const [isSelectID, setIsSelectID] = useState(null);
-  if (isSelectID) {
-    console.log("GO head");
-  }
+import { handleVideoWork } from "../../logic/logic";
+export default function Project({ controls }) {
   const [selected, setSelected] = useState(-1);
   const project = jobExperience[selected - 1];
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePause = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-      setIsPlaying(false);
-    }
-  };
   useEffect(() => {
     if (selected !== -1) {
-      handlePlay();
+      handleVideoWork("play", videoRef);
       return;
     }
-    handlePause();
+    handleVideoWork("pause", videoRef);
   }, [selected]);
 
   useEffect(() => {
     if (selected !== -1) {
-      // 禁用滾動
       document.body.style.overflow = "hidden";
     } else {
-      // 恢復滾動
       document.body.style.overflow = "auto";
     }
-    // 清理函數，當組件卸載或狀態改變時恢復滾動
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -63,7 +31,7 @@ export default function Project({ controls____ }) {
 
   return (
     <motion.div
-      animate={controls____}
+      animate={controls}
       className={styles.container}
       style={{ opacity: 0 }}
     >
@@ -78,6 +46,7 @@ export default function Project({ controls____ }) {
         >
           {jobExperience.map((job, index) => (
             <Item
+              key={index}
               job={job}
               index={index + 1}
               selected={selected}
@@ -137,7 +106,6 @@ export default function Project({ controls____ }) {
                   </motion.div>
                   <motion.div
                     layoutId={`project-des-${selected}-1`}
-                    // className={styles.project_description}
                     className={`${styles.project_description} ${styles.open}`}
                   >
                     In modern logistics operations, efficient communication and
@@ -172,7 +140,7 @@ export default function Project({ controls____ }) {
                     {project.tech.map((tech, desIndex) => (
                       <motion.div
                         layoutId={`project-tech-stack-${selected}-${desIndex}`}
-                        key={tech}
+                        key={desIndex}
                         className={styles.project_tech_stack}
                       >
                         {tech}

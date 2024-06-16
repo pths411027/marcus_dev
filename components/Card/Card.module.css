@@ -55,6 +55,7 @@
   font-weight: bold;
   font-family: monospace;
   outline: none;
+  width: auto;
   caret-color: #ffa500;
 }
 .Input::placeholder {

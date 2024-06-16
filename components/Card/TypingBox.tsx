@@ -1,19 +1,9 @@
 import { TypeAnimation } from "react-type-animation";
 import React, { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useSpring,
-  useDragControls,
-} from "framer-motion";
-import TypeWriterEffect from "react-typewriter-effect";
+import { motion } from "framer-motion";
 
 import styles from "./Card.module.css";
 import { terminalText } from "../../config/text";
-
-const ROTATION_RANGE = 32.5;
-const HALF_ROTATION_RANGE = 32.5 / 2;
 
 export default function TypingBox() {
   const inputRef = useRef(null);
@@ -31,7 +21,7 @@ export default function TypingBox() {
           return (
             step >= index && (
               <TypeAnimation
-                key={index}
+                key={Array.isArray(text.text) ? text.text[0] : text.text}
                 sequence={
                   text.type === "text"
                     ? [
@@ -75,7 +65,7 @@ export default function TypingBox() {
                   return (
                     (subStep >= subIndex || step >= index + 1) && (
                       <TypeAnimation
-                        key={subIndex}
+                        key={subText.text + subIndex}
                         speed={85}
                         sequence={[
                           subText.text,

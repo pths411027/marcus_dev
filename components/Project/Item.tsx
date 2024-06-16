@@ -19,7 +19,6 @@ export default function Item({ job, index, selected, setSelected }) {
   const controls = useAnimation();
   const videoControls = useAnimation();
   const [isHover, setIsHover] = useState(false);
-  console.log(isHover);
   return (
     <motion.div
       layoutId={`project-${index}`}
@@ -71,7 +70,7 @@ export default function Item({ job, index, selected, setSelected }) {
           {job.tech.map((tech, desIndex) => (
             <motion.div
               layoutId={`project-tech-stack-${index}-${desIndex}`}
-              key={tech}
+              key={desIndex}
               className={styles.project_tech_stack}
             >
               {tech}
