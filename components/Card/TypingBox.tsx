@@ -21,7 +21,11 @@ export default function TypingBox() {
           return (
             step >= index && (
               <TypeAnimation
-                key={Array.isArray(text.text) ? text.text[0] : text.text}
+                key={
+                  Array.isArray(text.text)
+                    ? `${text.text[0]}_${index} + `
+                    : `${text.text}_${index} + `
+                }
                 sequence={
                   text.type === "text"
                     ? [
@@ -47,11 +51,13 @@ export default function TypingBox() {
                         ,
                       ]
                 }
-                className={styles.custom_type_animation_cursor}
+                className={`${styles.custom_type_animation_cursor} ${styles.terminal}`}
                 cursor={false}
                 speed={85}
                 deletionSpeed={75}
-                style={{ color: text.color }}
+                style={{
+                  color: text.color,
+                }}
               />
             )
           );
@@ -59,13 +65,14 @@ export default function TypingBox() {
           return (
             step >= index && (
               <div
+                key={text.subText[0].text}
                 style={{ display: "flex", flexDirection: "row", gap: "1rem" }}
               >
                 {text.subText.map((subText, subIndex) => {
                   return (
                     (subStep >= subIndex || step >= index + 1) && (
                       <TypeAnimation
-                        key={subText.text + subIndex}
+                        key={`${subText.text}_${index}_${subIndex}`}
                         speed={85}
                         sequence={[
                           subText.text,
@@ -81,9 +88,11 @@ export default function TypingBox() {
                           },
                         ]}
                         wrapper="span"
-                        className={styles.custom_type_animation_cursor}
+                        className={`${styles.custom_type_animation_cursor} ${styles.terminal}`}
                         cursor={false}
-                        style={{ color: subText.color }}
+                        style={{
+                          color: subText.color,
+                        }}
                       />
                     )
                   );

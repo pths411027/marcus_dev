@@ -1,0 +1,29 @@
+.index {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvasContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 1000px; */
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  z-index: 1; /* 确保内容在canvas的前面 */
+}

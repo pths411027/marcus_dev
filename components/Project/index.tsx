@@ -5,9 +5,11 @@ import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import Item from "./Item";
 import { useEffect, useRef } from "react";
 import { handleVideoWork } from "../../logic/logic";
+import { projects } from "../../config/config";
+
 export default function Project({ controls }) {
   const [selected, setSelected] = useState(-1);
-  const project = jobExperience[selected - 1];
+  const project = projects[selected - 1];
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -42,12 +44,20 @@ export default function Project({ controls }) {
           style={{
             width: "100%",
             justifyContent: "center",
+            flexWrap: "wrap",
           }}
         >
-          {jobExperience.map((job, index) => (
+          {projects.map((project, index) => (
+            // <Item
+            //   key={index}
+            //   job={job}
+            //   index={index + 1}
+            //   selected={selected}
+            //   setSelected={setSelected}
+            // />
             <Item
               key={index}
-              job={job}
+              project={project}
               index={index + 1}
               selected={selected}
               setSelected={setSelected}
@@ -69,7 +79,6 @@ export default function Project({ controls }) {
                 layoutId={`project-${selected}`}
                 key={project.title}
                 className={`${styles.row_container} ${styles.project_container} ${styles.open}`}
-                // onClick={() => setSelected(-1)}
               >
                 <motion.div
                   layoutId={`closeButton-1`}
@@ -84,7 +93,7 @@ export default function Project({ controls }) {
                 <motion.video
                   layoutId={`video-${selected}`}
                   ref={videoRef}
-                  src="567.mov"
+                  src={project.src}
                   muted
                   loop
                   className={`${styles.project_video} ${styles.open}`}
@@ -95,6 +104,33 @@ export default function Project({ controls }) {
                   }}
                 />
                 <motion.div
+                  layoutId={`project-link-container${selected}`}
+                  className={styles.link_container}
+                >
+                  <motion.div
+                    layoutId={`project-git-link${selected}`}
+                    className={styles.link_item}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      window.open(project.git_repo);
+                    }}
+                  >
+                    Repo...
+                  </motion.div>
+                  <motion.div
+                    layoutId={`project-vercel-link${selected}`}
+                    className={styles.link_item}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      window.open(project.vercel);
+                    }}
+                  >
+                    Vercel...
+                  </motion.div>
+                </motion.div>
+                {/* <motion.div
                   layoutId={`project-content-${selected}`}
                   className={`${styles.project_content} ${styles.open}`}
                 >
@@ -102,20 +138,13 @@ export default function Project({ controls }) {
                     layoutId={`project-title-${selected}`}
                     className={`${styles.project_title} ${styles.open}`}
                   >
-                    Seatalk Chatbot
+                    {project.title}
                   </motion.div>
                   <motion.div
                     layoutId={`project-des-${selected}-1`}
                     className={`${styles.project_description} ${styles.open}`}
                   >
-                    In modern logistics operations, efficient communication and
-                    collaboration within the team are crucial. Traditional
-                    communication methods often suffer from delays and
-                    miscommunication, impacting work efficiency. To address
-                    these issues, we plan to develop a message chatbot based on
-                    SeaTalk and Apache Airflow, aiming to enhance communication
-                    efficiency and collaborative capabilities within the
-                    logistics team.
+                    Using 
                   </motion.div>
                   <motion.div
                     layoutId={`project-des-${selected}-2`}
@@ -133,11 +162,12 @@ export default function Project({ controls }) {
                     monitoring using Airflow to reduce human errors and improve
                     operational efficiency.
                   </motion.div>
+
                   <motion.div
                     layoutId={`project-tech-stacks-${selected}`}
                     className={styles.row_container}
                   >
-                    {project.tech.map((tech, desIndex) => (
+                    {project.techs.map((tech, desIndex) => (
                       <motion.div
                         layoutId={`project-tech-stack-${selected}-${desIndex}`}
                         key={desIndex}
@@ -147,7 +177,7 @@ export default function Project({ controls }) {
                       </motion.div>
                     ))}
                   </motion.div>
-                </motion.div>
+                </motion.div> */}
               </motion.div>
             </>
           )}

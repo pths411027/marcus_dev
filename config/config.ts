@@ -46,3 +46,46 @@ export const displayEffect: DisplayEffect = {
     transition: { duration: DURATION, times: [0, 0.99, 1] },
   },
 };
+
+export const projects = [
+  {
+    title: "Switch Card",
+    des: "built a switch card with framer-motion (animation)",
+    src: "./video/switch_card.mov",
+    git_repo: "https://github.com/pths411027/switch-card.git",
+    vercel: "https://switch-card-gamma.vercel.app/",
+    techs: ["react", "next.js", "framer-motion"],
+  },
+  {
+    title: "Scenery Card",
+    des: "built a scenery with css (hover, transform)",
+    src: "./video/scenery_card.mov",
+    git_repo: "https://github.com/pths411027/scenery-card.git/",
+    vercel: "https://scenery-six.vercel.app/",
+    techs: ["react", "next.js", "framer-motion"],
+  },
+  {
+    title: "Framework Card",
+    des: "built a framework card with css (hover, scale, transform)",
+    src: "./video/framework_card.mov",
+    git_repo: "https://github.com/pths411027/frameworks-card.git",
+    vercel: "https://project-card-pi.vercel.app/",
+    techs: ["react", "next.js", "framer-motion"],
+  },
+  {
+    title: "App Dock",
+    des: "built a app dock with js logic",
+    src: "./video/app_dock.mov",
+    git_repo: "https://github.com/pths411027/app-dock.git",
+    vercel: "https://app-docker.vercel.app/",
+    techs: ["react", "next.js", "framer-motion"],
+  },
+  {
+    title: "App Bar",
+    des: "built a app bar with css pseudo elements",
+    src: "./video/app_bar.mov",
+    git_repo: "https://github.com/pths411027/app-bar.git",
+    vercel: "https://app-bar.vercel.app/",
+    techs: ["react", "next.js", "framer-motion"],
+  },
+];

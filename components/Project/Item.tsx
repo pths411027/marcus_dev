@@ -14,7 +14,7 @@ import {
 } from "framer-motion";
 
 import { useEffect, useRef } from "react";
-export default function Item({ job, index, selected, setSelected }) {
+export default function Item({ project, index, selected, setSelected }) {
   const videoRef = useRef(null);
   const controls = useAnimation();
   const videoControls = useAnimation();
@@ -22,14 +22,15 @@ export default function Item({ job, index, selected, setSelected }) {
   return (
     <motion.div
       layoutId={`project-${index}`}
-      key={job.title}
+      key={project.title}
       className={`${styles.row_container} ${styles.project_container} `}
       onClick={() => setSelected(selected === index ? -1 : index)}
       onHoverStart={() => {
         if (selected !== -1) return;
         setIsHover(true);
         videoControls.start({
-          opacity: 0.8,
+          opacity: 0.7,
+          filter: "blur(3px)",
         });
         controls.start({
           opacity: 1,
@@ -41,49 +42,61 @@ export default function Item({ job, index, selected, setSelected }) {
         setIsHover(false);
         videoControls.start({
           opacity: 1,
+          filter: "blur(0px)",
         });
       }}
     >
       <motion.div
         animate={controls}
-        layoutId={`project-content-${index}`}
-        className={styles.project_content}
+        layoutId={`project-cover-${index}`}
+        className={styles.project_cover}
         style={{ opacity: 0, y: "200%", zIndex: 100 }}
       >
         <motion.div
-          layoutId={`project-title-${index}`}
-          className={styles.project_title}
+          animate={controls}
+          layoutId={`project-content-${index}`}
+          className={styles.project_content}
         >
-          Seatalk Chatbot
-        </motion.div>
-        <motion.div
-          layoutId={`project-des-${index}`}
-          className={styles.project_description}
-        >
-          Using seatalk and airflow build message chatbot for logistic team!
-        </motion.div>
-        <motion.div
-          layoutId={`project-tech-stacks-${index}`}
-          className={styles.row_container}
-          style={{ flexWrap: "wrap" }}
-        >
-          {job.tech.map((tech, desIndex) => (
-            <motion.div
-              layoutId={`project-tech-stack-${index}-${desIndex}`}
-              key={desIndex}
-              className={styles.project_tech_stack}
-            >
-              {tech}
-            </motion.div>
-          ))}
+          <motion.div
+            layoutId={`project_cover-${index}`}
+            className={styles.project_cover}
+          />
+          <motion.div
+            layoutId={`project-title-${index}`}
+            className={styles.project_title}
+          >
+            {project.title}
+          </motion.div>
+          <motion.div
+            layoutId={`project-des-${index}`}
+            className={styles.project_description}
+          >
+            {project.des}
+          </motion.div>
+          <motion.div
+            layoutId={`project-tech-stacks-${index}`}
+            className={styles.row_container}
+            style={{ flexWrap: "wrap" }}
+          >
+            {project.techs.map((tech, desIndex) => (
+              <motion.div
+                layoutId={`project-tech-stack-${index}-${desIndex}`}
+                key={desIndex}
+                className={styles.project_tech_stack}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
+
       <motion.video
         animate={videoControls}
         className={styles.project_video + " " + (isHover ? styles.hover : "")}
         layoutId={`project-video-${index}`}
         ref={videoRef}
-        src="567.mov"
+        src={project.src}
         muted
         onLoadedData={() => {
           if (videoRef.current) {

@@ -5,26 +5,15 @@ import {
   useMotionTemplate,
   useMotionValue,
   useSpring,
+  useAnimation,
 } from "framer-motion";
-
 import styles from "./Card.module.css";
-import { terminalText } from "../../config/text";
 import TypingBox from "./TypingBox";
-const ROTATION_RANGE = 32.5;
-const HALF_ROTATION_RANGE = 32.5 / 2;
 
 export default function Card() {
   const [startTyping, setStartTyping] = useState(false);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-
-  const handleTypingComplete = () => {
-    if (currentTextIndex < terminalText.length - 1) {
-      setCurrentTextIndex(currentTextIndex + 1);
-    }
-  };
 
   const parentRef = useRef(null);
-
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -33,65 +22,84 @@ export default function Card() {
   const xSpring = useSpring(x);
   const ySpring = useSpring(y);
 
-  const handleMouseMove = (e) => {
-    if (!ref.current) return;
-
-    const rect = ref.current.getBoundingClientRect();
-
-    const width = rect.width;
-    const height = rect.height;
-
-    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
-    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
-
-    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
-    const rY = mouseX / width - HALF_ROTATION_RANGE;
-
-    x.set(rX);
-    y.set(rY);
-
-    setStartTyping(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (!ref.current) return;
-    x.set(0);
-    y.set(0);
-    setStartTyping(true);
-  };
-
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
+  const controls = useAnimation();
+  const [isFirst, setIsFirst] = useState(true);
+  const [isTouchBound, setIsTouchBound] = useState(false);
   return (
     <motion.div
       ref={parentRef}
       className={`${styles.container} ${styles.column_container}`}
+      onHoverStart={() => {
+        if (isFirst) {
+          controls
+            .start({ rotate: 5, transition: { duration: 0.1 } })
+            .then(() =>
+              controls
+                .start({ rotate: -5, transition: { duration: 0.1 } })
+                .then(() => controls.start({ rotate: 0 }))
+            );
+          setIsFirst(false);
+        }
+      }}
+      onDoubleClick={() => {
+        controls
+          .start({ rotate: 5, transition: { duration: 0.1 } })
+          .then(() =>
+            controls
+              .start({ rotate: -5, transition: { duration: 0.1 } })
+              .then(() => controls.start({ rotate: 0 }))
+          );
+      }}
       style={{
+        border: isTouchBound && "2px solid white",
         position: "relative",
-        backgroundImage: "url('./10.png')",
-
+        height: "800px",
         backgroundSize: "cover",
         alignItems: "center",
       }}
     >
       <motion.div
+        animate={controls}
         className={styles.column_container}
         ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onClick={() => setStartTyping(true)}
         style={{
-          transformStyle: "preserve-3d",
-          transform,
+          position: "absolute",
           width: "80%",
           minHeight: "400px",
           height: "400px",
           borderRadius: "1rem",
-          // zIndex: "1 !important",
-          border: "1px solid rgba(0, 0, 0, 0.1)",
+          border: "2px solid rgba(255, 255, 255, 0.8)",
+          cursor: "grab",
         }}
+        drag
+        dragConstraints={parentRef}
+        onDrag={(_, info) => {
+          const rect = parentRef.current.getBoundingClientRect();
+          const windowWidth = window.innerWidth;
+          const { left, top, right, bottom } =
+            ref.current.getBoundingClientRect();
+          if (
+            left < 0 ||
+            right > windowWidth ||
+            top < rect.top ||
+            bottom > rect.bottom
+          ) {
+            setIsTouchBound(true);
+          } else {
+            setIsTouchBound(false);
+          }
+        }}
+        onDragEnd={() => {
+          setIsTouchBound(false);
+        }}
+        dragMomentum={false}
+        dragElastic={0.1}
       >
         <div
           style={{
@@ -101,14 +109,15 @@ export default function Card() {
             inset: "1px",
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            backdropFilter: "blur(5px)",
+            // backgroundColor: "rgba(0, 0, 0, 0.7)",
+            backgroundColor: "rgba(24, 71, 24, 0.4)",
+            backdropFilter: "blur(2px)",
             borderRadius: "1rem",
             gap: "0px",
             boxShadow: "0 0 20px rgba(0, 0, 0, 0.15)",
           }}
         >
-          <div
+          <motion.div
             className={styles.row_container}
             style={{
               position: "relative",
@@ -146,8 +155,8 @@ export default function Card() {
                 style={{ backgroundColor: "#29c232" }}
               />
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className={styles.column_container}
             style={{
               justifyContent: "center",
@@ -160,7 +169,7 @@ export default function Card() {
             }}
           >
             {startTyping && <TypingBox />}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>

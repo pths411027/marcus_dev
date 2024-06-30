@@ -6,7 +6,9 @@ import Job from "../components/Job";
 import Tech from "../components/Tech";
 import Project from "../components/Project";
 import Card from "../components/Card";
-import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
+import Sky from "../components/Sky";
+import { useEffect, useState, useRef } from "react";
 import { displayEffect } from "../config/config";
 import {
   useScroll,
@@ -56,6 +58,7 @@ export default function Home() {
   if (!isClient) {
     return null;
   }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -64,19 +67,23 @@ export default function Home() {
         <meta name="description" content={HEAD.description} />
       </Head>
       <main className={styles.container}>
-        <Analytics />
-        <Profile
-          imgControls={imgControls}
-          contentControls={biographyControls}
-          marginTopControls={marginTopControls}
-        />
-        <Tech
-          titleControls={techTitleControls}
-          contentControls={techContentControls}
-        />
-        <Job controls={jobControls} />
-        <Project controls={projectControls} />
-        <Card />
+        {/* <Sky /> */}
+
+        <div className={styles.content}>
+          <Analytics />
+          <Profile
+            imgControls={imgControls}
+            marginTopControls={marginTopControls}
+          />
+          <Tech
+            titleControls={techTitleControls}
+            contentControls={techContentControls}
+          />
+          <Job controls={jobControls} />
+          <Project controls={projectControls} />
+          <Card />
+          <Footer />
+        </div>
       </main>
 
       <style jsx global>{`
