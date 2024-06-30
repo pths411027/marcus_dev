@@ -9,11 +9,11 @@ export default function TypingBox() {
   const inputRef = useRef(null);
   const [step, setStep] = useState(0);
   const [subStep, setSubStep] = useState(0);
-  useEffect(() => {
-    if (step === terminalText.length) {
-      inputRef.current.focus();
-    }
-  }, [step]);
+  // useEffect(() => {
+  //   if (step === terminalText.length) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [step]);
   return (
     <>
       {terminalText.map((text, index) => {
@@ -102,7 +102,7 @@ export default function TypingBox() {
           );
         }
       })}
-      {step === terminalText.length && (
+      {/* {step === terminalText.length && (
         <motion.div
           animate={{ opacity: 1 }}
           style={{
@@ -128,7 +128,7 @@ export default function TypingBox() {
             }}
           ></input>
         </motion.div>
-      )}
+      )} */}
     </>
   );
 }

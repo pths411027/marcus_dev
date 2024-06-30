@@ -80,9 +80,9 @@
 
 .lang_box {
   align-items: center;
-  gap: 10px;
-  padding: 5px 10px;
-  border-radius: 10px;
+  gap: 8px;
+  padding: 5px 20px;
+  border-radius: 8px;
   width: auto;
   flex-wrap: nowrap;
   font-size: 14px;
@@ -91,7 +91,7 @@
   }
 }
 .tech_item {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 30px;
   white-space: nowrap;

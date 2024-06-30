@@ -65,14 +65,14 @@ export default function TechItem({ tech, index, selected, setSelected }) {
               backgroundColor: tech.color,
             }}
           >
-            <img
+            {/* <img
               className={styles.fields_Img}
               src={lang.img}
               style={{
                 width: "24px",
                 backgroundColor: tech.background,
               }}
-            />
+            /> */}
             <div
               className={styles.tech_item}
               style={{
