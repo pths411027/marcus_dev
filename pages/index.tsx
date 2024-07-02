@@ -8,7 +8,7 @@ import Project from "../components/Project";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Sky from "../components/Sky";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { displayEffect } from "../config/config";
 import {
   useScroll,

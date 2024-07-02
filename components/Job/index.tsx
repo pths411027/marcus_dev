@@ -1,21 +1,8 @@
-import { useState } from "react";
 import styles from "./Job.module.css";
-import { jobExperience, techStack } from "../../config/text";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  LayoutGroup,
-  scroll,
-  useMotionValueEvent,
-  useAnimation,
-  AnimatePresence,
-} from "framer-motion";
-import { useEffect } from "react";
-export default function Job({ controls }) {
-  const { scrollY } = useScroll();
+import { jobExperience } from "../../config/text";
+import { motion } from "framer-motion";
 
+export default function Job({ controls }) {
   return (
     <motion.div
       animate={controls}

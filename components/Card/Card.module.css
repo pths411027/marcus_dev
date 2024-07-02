@@ -1,5 +1,5 @@
 .container {
-  padding: 100px;
+  padding: 50px;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -75,6 +75,13 @@
   font-family: monospace;
   font-size: 20px;
   line-height: 25px;
+}
+
+.hint_wording {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
 }
 @keyframes cursor {
   50% {

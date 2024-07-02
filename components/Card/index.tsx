@@ -19,14 +19,11 @@ export default function Card() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const xSpring = useSpring(x);
-  const ySpring = useSpring(y);
-
-  const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`;
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
+  const wordingControls = useAnimation();
   const controls = useAnimation();
   const [isFirst, setIsFirst] = useState(true);
   const [isTouchBound, setIsTouchBound] = useState(false);
@@ -36,12 +33,20 @@ export default function Card() {
       className={`${styles.container} ${styles.column_container}`}
       onHoverStart={() => {
         if (isFirst) {
-          controls
-            .start({ rotate: 5, transition: { duration: 0.1 } })
+          wordingControls
+            .start({ opacity: 1, transition: { duration: 0.5 } })
             .then(() =>
-              controls
-                .start({ rotate: -5, transition: { duration: 0.1 } })
-                .then(() => controls.start({ rotate: 0 }))
+              wordingControls
+                .start({
+                  x: [0, 10, -10, 10, -10, 10, -10, 10, -10, 0],
+                  transition: { duration: 1 },
+                })
+                .then(() =>
+                  controls.start({
+                    rotate: [5, -5, 5, -5, 0],
+                    transition: { duration: 0.8 },
+                  })
+                )
             );
           setIsFirst(false);
         }
@@ -58,11 +63,18 @@ export default function Card() {
       style={{
         border: isTouchBound && "2px solid white",
         position: "relative",
-        height: "800px",
+        height: "700px",
         backgroundSize: "cover",
         alignItems: "center",
       }}
     >
+      <motion.div
+        animate={wordingControls}
+        className={styles.hint_wording}
+        style={{ opacity: 0 }}
+      >
+        Click it, move it
+      </motion.div>
       <motion.div
         animate={controls}
         className={styles.column_container}
@@ -70,6 +82,7 @@ export default function Card() {
         onClick={() => setStartTyping(true)}
         style={{
           position: "absolute",
+          top: "150px",
           width: "80%",
           minHeight: "400px",
           height: "400px",
@@ -109,7 +122,6 @@ export default function Card() {
             inset: "1px",
             display: "flex",
             flexDirection: "column",
-            // backgroundColor: "rgba(0, 0, 0, 0.7)",
             backgroundColor: "rgba(24, 71, 24, 0.4)",
             backdropFilter: "blur(2px)",
             borderRadius: "1rem",

@@ -22,7 +22,7 @@
 }
 .name {
   text-align: center;
-  font-size: 40px;
+  font-size: 60px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   @media screen and (max-width: 768px) {

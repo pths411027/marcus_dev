@@ -24,5 +24,8 @@
 
 .content {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
   z-index: 1;
 }
