@@ -63,6 +63,28 @@ export default function Footer() {
             />
           </div>
         ))}
+        <div
+          style={{
+            border: "1px solid white",
+            width: "60px",
+            height: "60px",
+            borderRadius: "100%",
+            cursor: "pointer",
+            lineHeight: "60px",
+            color: "white",
+            textAlign: "center",
+            fontFamily: "monospace",
+            fontSize: "30px",
+            fontWeight: "bold",
+          }}
+          onClick={() =>
+            window.open(
+              "https://drive.google.com/file/d/1KI-sbhfTnbQ044iUYl9itHFq2Q0BZ3W6/view?usp=sharing"
+            )
+          }
+        >
+          CV
+        </div>
       </div>
       <div
         style={{ color: "white", fontSize: "20px", fontFamily: "monospace" }}
