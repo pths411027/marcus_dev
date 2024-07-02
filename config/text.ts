@@ -82,7 +82,7 @@ export const techStack = [
       { lang: "Docker", img: "atom.png" },
       { lang: "vercel", img: "atom.png" },
       { lang: "CICD", img: "atom.png" },
-      { lang: "GCP", img: "atom.png" },
+      { lang: "Google Cloud Platform", img: "atom.png" },
     ],
     color: "rgb(255, 160, 122)",
     background: "rgba(255, 160, 122, 0.3)",
