@@ -12,8 +12,8 @@ export const jobExperience = [
     duration: "2023/07 - Present",
     title: "OPS TW BI - Junior Frontend Engineer, Shopee",
     descriptions: [
-      "Built data product for operation division using React, TypeScript and MUI as frontend stack",
-      "Worked closely with backend engineers, product managers, and site reliability engineers to deliver high-quality products",
+      "Built data product for operation division using React, TypeScript and MUI as frontend stack.",
+      "Worked closely with backend engineers, product managers, and site reliability engineers to deliver high-quality products.",
     ],
     tech: [
       "React",
@@ -28,10 +28,10 @@ export const jobExperience = [
     duration: "2023/01 - 2023/07",
     title: "OPS TW BI - Backend Engineer Intern, Shopee",
     descriptions: [
-      "Built data product for operation division using FastAPI, SQLAlchemy, and MySQL as backend stack",
+      "Built data product for operation division using FastAPI, SQLAlchemy, and MySQL as backend stack.",
       "Developed and maintained ETL pipelines for data processing and analysis, using Apache Airflow and MySQL.",
-      "Created Chatbot for convenience store logistics alert system",
-      "Created python tool for payment team to deal with payment, refund and credit card data",
+      "Created Chatbot for convenience store logistics alert system.",
+      "Created python tool for payment team to deal with payment, refund and credit card data.",
     ],
     tech: ["Python", "FastAPI", "MySQL", "SQLAlchemy", "Apache Airflow"],
   },
@@ -39,8 +39,8 @@ export const jobExperience = [
     duration: "2022/06 - 2022/12",
     title: "Data Analyst Intern, Nomura",
     descriptions: [
-      "Built data pipelines for data processing and analysis, using Python, Pandas, and PyTorch",
-      "Analyzed and visualized data to provide insights for the sales team and phone team",
+      "Built data pipelines for data processing and analysis, using Python, Pandas, and PyTorch.",
+      "Analyzed and visualized data to provide insights for the sales team and phone team.",
     ],
     tech: ["Python", "Pandas", "PyTorch"],
   },
