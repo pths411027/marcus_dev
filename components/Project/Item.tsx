@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Project.module.css";
-import useStore from "../../pages/store";
+import useStore from "../../store";
 import { motion, useAnimation } from "framer-motion";
 
 import { useEffect, useRef } from "react";

@@ -9,7 +9,7 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Loader from "../components/Loading";
 import { isMobile, isTablet, isBrowser } from "react-device-detect";
-import useStore from "./store";
+import useStore from "../store";
 import { useEffect, useState } from "react";
 import { displayEffect } from "../config/config";
 import {
@@ -36,6 +36,7 @@ export default function Home() {
   const imgControls = useAnimation();
   const marginTopControls = useTransform(scrollY, [0, 200], [0, 200]);
   const [animationExecuted, setAnimationExecuted] = useState(false);
+  const isLoadingNum = useStore((state) => state.isLoadingNum !== 5);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 0 && !animationExecuted) {
@@ -60,7 +61,6 @@ export default function Home() {
   if (!isClient) {
     return null;
   }
-  const isLoadingNum = useStore((state) => state.isLoadingNum !== 5);
 
   return (
     <div className={styles.container}>
