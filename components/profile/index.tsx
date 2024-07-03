@@ -4,9 +4,11 @@ import { IMG } from "../../config/config";
 import { TypeAnimation } from "react-type-animation";
 import { selfIntro } from "../../config/text";
 import { useState } from "react";
+import useStore from "../../store";
 export default function Profile({ imgControls, marginTopControls }) {
   const [key, setKey] = useState(0);
   const [status, setStatus] = useState(false);
+  const isLoading = useStore((state) => state.isLoadingNum === 5);
   return (
     <div className={styles.container}>
       <motion.img
@@ -22,24 +24,26 @@ export default function Profile({ imgControls, marginTopControls }) {
         }}
         style={{ cursor: "pointer" }}
       >
-        <TypeAnimation
-          key={key}
-          sequence={[
-            200,
-            () => {
-              setStatus(true);
-            },
-            ...selfIntro,
-            (el) => el.classList.remove(styles.custom_type_animation_cursor),
-            () => {
-              setStatus(false);
-            },
-          ]}
-          className={`${styles.self_introduction} ${styles.custom_type_animation_cursor}`}
-          cursor={false}
-          speed={80}
-          deletionSpeed={80}
-        />
+        {isLoading && (
+          <TypeAnimation
+            key={key}
+            sequence={[
+              200,
+              () => {
+                setStatus(true);
+              },
+              ...selfIntro,
+              (el) => el.classList.remove(styles.custom_type_animation_cursor),
+              () => {
+                setStatus(false);
+              },
+            ]}
+            className={`${styles.self_introduction} ${styles.custom_type_animation_cursor}`}
+            cursor={false}
+            speed={80}
+            deletionSpeed={80}
+          />
+        )}
       </motion.div>
     </div>
   );

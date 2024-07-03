@@ -75,12 +75,10 @@ export default function Home() {
         {!isMobile ? (
           <div className={styles.content}>
             <Analytics />
-            {!isLoadingNum && (
-              <Profile
-                imgControls={imgControls}
-                marginTopControls={marginTopControls}
-              />
-            )}
+            <Profile
+              imgControls={imgControls}
+              marginTopControls={marginTopControls}
+            />
 
             <Tech
               titleControls={techTitleControls}
