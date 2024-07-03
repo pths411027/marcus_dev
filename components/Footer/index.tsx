@@ -41,6 +41,7 @@ export default function Footer() {
       >
         {arr.map(({ title, url }, index) => (
           <div
+            key={index}
             style={{
               backgroundColor: "white",
               border: "1px solid white",

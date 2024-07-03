@@ -1,17 +1,7 @@
 import { useState } from "react";
 import styles from "./Project.module.css";
-import { jobExperience, techStack } from "../../config/text";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  LayoutGroup,
-  scroll,
-  useMotionValueEvent,
-  useAnimation,
-  AnimatePresence,
-} from "framer-motion";
+import useStore from "../../pages/store";
+import { motion, useAnimation } from "framer-motion";
 
 import { useEffect, useRef } from "react";
 export default function Item({ project, index, selected, setSelected }) {
@@ -19,6 +9,7 @@ export default function Item({ project, index, selected, setSelected }) {
   const controls = useAnimation();
   const videoControls = useAnimation();
   const [isHover, setIsHover] = useState(false);
+  const setIsLoading = useStore((state) => state.setIsLoading);
   return (
     <motion.div
       layoutId={`project-${index}`}
@@ -102,6 +93,7 @@ export default function Item({ project, index, selected, setSelected }) {
           if (videoRef.current) {
             videoRef.current.currentTime = 0;
           }
+          setIsLoading();
         }}
       />
     </motion.div>

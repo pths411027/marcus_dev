@@ -7,7 +7,9 @@ import Tech from "../components/Tech";
 import Project from "../components/Project";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
+import Loader from "../components/Loading";
 import { isMobile, isTablet, isBrowser } from "react-device-detect";
+import useStore from "./store";
 import { useEffect, useState } from "react";
 import { displayEffect } from "../config/config";
 import {
@@ -34,7 +36,8 @@ export default function Home() {
   const imgControls = useAnimation();
   const marginTopControls = useTransform(scrollY, [0, 200], [0, 200]);
   const [animationExecuted, setAnimationExecuted] = useState(false);
-
+  const isLoadingNum = useStore((state) => state.isLoadingNum !== 5);
+  console.log(isLoadingNum);
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 0 && !animationExecuted) {
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -58,7 +61,6 @@ export default function Home() {
   if (!isClient) {
     return null;
   }
-  console.log(isMobile, isTablet, isBrowser);
 
   return (
     <div className={styles.container}>
@@ -69,6 +71,7 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         {/* <Sky /> */}
+        {isLoadingNum && <Loader />}
         {!isMobile ? (
           <div className={styles.content}>
             <Analytics />
