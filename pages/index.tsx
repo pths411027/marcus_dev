@@ -7,7 +7,7 @@ import Tech from "../components/Tech";
 import Project from "../components/Project";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
-import Sky from "../components/Sky";
+import { isMobile, isTablet, isBrowser } from "react-device-detect";
 import { useEffect, useState } from "react";
 import { displayEffect } from "../config/config";
 import {
@@ -58,6 +58,7 @@ export default function Home() {
   if (!isClient) {
     return null;
   }
+  console.log(isMobile, isTablet, isBrowser);
 
   return (
     <div className={styles.container}>
@@ -68,22 +69,35 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         {/* <Sky /> */}
-
-        <div className={styles.content}>
-          <Analytics />
-          <Profile
-            imgControls={imgControls}
-            marginTopControls={marginTopControls}
-          />
-          <Tech
-            titleControls={techTitleControls}
-            contentControls={techContentControls}
-          />
-          <Job controls={jobControls} />
-          <Project controls={projectControls} />
-          <Card />
-          <Footer />
-        </div>
+        {!isMobile ? (
+          <div className={styles.content}>
+            <Analytics />
+            <Profile
+              imgControls={imgControls}
+              marginTopControls={marginTopControls}
+            />
+            <Tech
+              titleControls={techTitleControls}
+              contentControls={techContentControls}
+            />
+            <Job controls={jobControls} />
+            <Project controls={projectControls} />
+            <Card />
+            <Footer />
+          </div>
+        ) : (
+          <div style={{ height: "100vh", color: "white" }}>
+            <p
+              style={{
+                margin: "0 auto",
+                lineHeight: "100vh",
+                fontFamily: "Segoe UI",
+              }}
+            >
+              This content is only available on desktop devices.
+            </p>
+          </div>
+        )}
       </main>
 
       <style jsx global>{`
