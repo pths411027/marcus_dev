@@ -5,8 +5,8 @@ export default function Loader() {
     "rgb(250, 170, 51)",
     "rgb(55, 118, 171)",
     "rgb(255, 160, 122)",
-    "rgb(250, 170, 51)",
-    "rgb(55, 118, 171)",
+    "rgb(34, 139, 34)",
+    "rgb(128, 0, 128)",
   ];
 
   const containerVariants = {
