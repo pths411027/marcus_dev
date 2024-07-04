@@ -71,7 +71,7 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         {/* <Sky /> */}
-        {isLoadingNum && <Loader />}
+        {isLoadingNum && !isMobile && <Loader />}
         {!isMobile ? (
           <div className={styles.content}>
             <Analytics />
