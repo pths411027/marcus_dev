@@ -48,13 +48,6 @@ export default function Project({ controls }) {
           }}
         >
           {projects.map((project, index) => (
-            // <Item
-            //   key={index}
-            //   job={job}
-            //   index={index + 1}
-            //   selected={selected}
-            //   setSelected={setSelected}
-            // />
             <Item
               key={index}
               project={project}
@@ -75,10 +68,10 @@ export default function Project({ controls }) {
                 onClick={() => setSelected(-1)}
               />
               <motion.div
-                onScroll={(e) => e.stopPropagation()}
                 layoutId={`project-${selected}`}
                 key={project.title}
                 className={`${styles.row_container} ${styles.project_container} ${styles.open}`}
+                style={{ overflow: "hidden" }}
               >
                 <motion.div
                   layoutId={`closeButton-1`}
@@ -130,54 +123,6 @@ export default function Project({ controls }) {
                     Vercel...
                   </motion.div>
                 </motion.div>
-                {/* <motion.div
-                  layoutId={`project-content-${selected}`}
-                  className={`${styles.project_content} ${styles.open}`}
-                >
-                  <motion.div
-                    layoutId={`project-title-${selected}`}
-                    className={`${styles.project_title} ${styles.open}`}
-                  >
-                    {project.title}
-                  </motion.div>
-                  <motion.div
-                    layoutId={`project-des-${selected}-1`}
-                    className={`${styles.project_description} ${styles.open}`}
-                  >
-                    Using 
-                  </motion.div>
-                  <motion.div
-                    layoutId={`project-des-${selected}-2`}
-                    className={`${styles.project_description} ${styles.open}`}
-                  >
-                    1. Real-Time Messaging: Utilize SeaTalk's real-time
-                    messaging capabilities to facilitate quick information
-                    exchange within the logistics team.
-                  </motion.div>
-                  <motion.div
-                    layoutId={`project-des-${selected}-3`}
-                    className={`${styles.project_description} ${styles.open}`}
-                  >
-                    2. Task Automation: Implement automated task processing and
-                    monitoring using Airflow to reduce human errors and improve
-                    operational efficiency.
-                  </motion.div>
-
-                  <motion.div
-                    layoutId={`project-tech-stacks-${selected}`}
-                    className={styles.row_container}
-                  >
-                    {project.techs.map((tech, desIndex) => (
-                      <motion.div
-                        layoutId={`project-tech-stack-${selected}-${desIndex}`}
-                        key={desIndex}
-                        className={styles.project_tech_stack}
-                      >
-                        {tech}
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div> */}
               </motion.div>
             </>
           )}

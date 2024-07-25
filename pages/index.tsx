@@ -73,7 +73,13 @@ export default function Home() {
         {/* <Sky /> */}
         {isLoadingNum && !isMobile && <Loader />}
         {!isMobile ? (
-          <div className={styles.content}>
+          <div
+            className={styles.content}
+            style={{
+              height: isLoadingNum ? "100vh" : "auto",
+              overflow: isLoadingNum ? "hidden" : "",
+            }}
+          >
             <Analytics />
             <Profile
               imgControls={imgControls}
